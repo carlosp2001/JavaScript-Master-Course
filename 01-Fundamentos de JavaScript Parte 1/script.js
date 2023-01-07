@@ -67,3 +67,19 @@ console.log(typeof year);
 
 // El valor null se considera un error, un error que nunca se corrige por razones heredadas
 console.log(typeof null);
+
+
+// Let, const y var
+
+let age = 30;
+age = 31;
+
+// Declaramos una variable constante / inmutable
+const birthYear = 1991;
+
+// Necesitamos declarar un valor inicial en una constante
+// const job;
+
+var job = 'programmer';
+job = 'teacher';
+
