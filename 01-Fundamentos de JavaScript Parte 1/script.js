@@ -39,3 +39,31 @@ let job1 = 'Programmer';
 let job2 = 'teacher';
 
 console.log(myFirstJob);
+
+// Tipos de datos
+
+console.log(true);
+let javaScriptIsFun = true;
+console.log(javaScriptIsFun);
+
+// Uso de typeof / se utiliza para saber el tipo de dato que es
+
+console.log(typeof true);
+console.log(typeof javaScriptIsFun);
+console.log(typeof 23);
+console.log(typeof 'Jonas');
+
+javaScriptIsFun = 'YES!';
+console.log(typeof javaScriptIsFun);
+
+// Valor undefined
+
+let year;
+console.log(year);
+console.log((typeof year));
+
+year = 1991;
+console.log(typeof year);
+
+// El valor null se considera un error, un error que nunca se corrige por razones heredadas
+console.log(typeof null);
