@@ -166,4 +166,28 @@ const markHigherBMI = BMIMark > BMIJohn;
 
 console.log(BMIMark, BMIJohn, markHigherBMI);
 
+// Strings y plantillas literales
 
+const firstName = 'Jonas';
+const job = 'teacher';
+const birthYear = 1991;
+const year = 2037;
+
+const jonas = "I'm " + firstName + ', a ' + (year - birthYear) + ' years old ' + job + '!';
+console.log(jonas);
+
+const jonasNew = `I'm ${firstName}, a ${year - birthYear} years old ${job}!`;
+
+console.log(`Just a regular string...`);
+
+// Cadenas multilineas
+
+console.log('String with \n\
+multiplie \n\
+lines');
+
+// La nueva forma de hacerlo
+
+console.log(`String with
+ multiple 
+ lines`);
