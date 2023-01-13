@@ -83,3 +83,40 @@ const birthYear = 1991;
 var job = 'programmer';
 job = 'teacher';
 
+
+// Operadores
+
+// Operadores matematicos
+
+const now = 2037;
+const ageJonas = now - 1991;
+const ageSarah = now - 2018;
+console.log(ageJonas, ageSarah);
+
+// Multiplicación / Division / Operador de Exponente
+console.log(ageJonas * 2, ageJonas / 10, 2 ** 3);
+
+// Operador + podemos concatenar cadenas
+const firstName = 'Jonas';
+const lastName = 'Schmedtmann';
+console.log(firstName + ' ' + lastName);
+
+// Operador typeof se usa para conocer el tipo de valor
+
+
+// Operadores de asignacion
+let x = 10 + 5;
+x += 10; // x = x + 10 = 25
+x *= 4; // x = x * 4 = 100
+x /= 2; // x = x * 4 = 50
+x ++; // Operador de incremento
+x --; // Operador de decremento
+console.log(x);
+
+// Operadores de comparación
+console.log(ageJonas > ageSarah); // result boolean true <, >, >=, <=
+console.log(ageSarah >= 18);
+
+const isFullAge = ageSarah >= 18;
+console.log(now - 1991 > now - 2018);
+
