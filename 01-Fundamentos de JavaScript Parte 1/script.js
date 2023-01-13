@@ -109,8 +109,8 @@ let x = 10 + 5;
 x += 10; // x = x + 10 = 25
 x *= 4; // x = x * 4 = 100
 x /= 2; // x = x * 4 = 50
-x ++; // Operador de incremento
-x --; // Operador de decremento
+x++; // Operador de incremento
+x--; // Operador de decremento
 console.log(x);
 
 // Operadores de comparación
@@ -119,4 +119,24 @@ console.log(ageSarah >= 18);
 
 const isFullAge = ageSarah >= 18;
 console.log(now - 1991 > now - 2018);
+
+
+// Precedencia de ooperadores: Basicamente es el orden con el cual los operadores se ejecutan
+const now = 2037;
+const ageJonas = now - 1991;
+const ageSarah = now - 2018;
+
+console.log(now - 1991 > now - 2018);
+console.log(25 - 10 - 5);
+
+let x, y;
+x = y = 25 - 10 - 5; // x = y = 10, x = 10
+console.log(x, y);
+
+const averageAge = (ageJonas + ageSarah) / 2; // Utilizando el operador de agrupacion () paréntesis
+console.log(ageJonas, ageSarah, averageAge);
+
+
+
+
 
