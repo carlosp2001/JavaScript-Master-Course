@@ -191,3 +191,27 @@ lines');
 console.log(`String with
  multiple 
  lines`);
+
+
+// Estructuras de control
+// Tomar decisiones if / else declaraciones
+
+const age = 19;
+const isOldEnough = age >= 18;
+
+if (age >= 18) {
+	console.log('Sarah can start driving license');
+} else {
+	const yearsLeft = 18 - age;
+	console.log(`Sarah is too young. Waith another ${yearsLeft} years :)`);
+}
+
+const birthYear = 1998;
+let century;
+if (birthYear <= 2000) {
+	// Cualquier variable que declaremos dentro del bloque sera accesible dentro del bloque.
+	century = 20;
+} else {
+	century = 21;
+}
+console.log(century);
