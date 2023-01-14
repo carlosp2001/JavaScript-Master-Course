@@ -241,3 +241,33 @@ if (BMIMark > BMIJohn) {
 } else {
 	console.log(`John's BMI(${BMIJohn}) is higher than Mark's ${BMIMark}!`);
 }
+
+
+// Conversion de tipo y coercion de tipo
+// Conversion nosotros manualmente convertimos un dato en otro tipo mientras que en la coercion de tipo JS
+// automaticamente hace las conversiones
+
+///////////////////////////////////////
+// Conversion de tipo
+const inputYear = '1991';
+// Convertir strings en number value
+console.log(Number(inputYear), inputYear);
+console.log(Number(inputYear) + 18);
+
+console.log(Number('Jonas')); // Nos devuelve NaN, siempre devuelve el valor NaN todas las operaciones que se
+// realizan con numeros pero no devuelve un numero
+console.log(typeof NaN);
+
+// Convertir de numero a string
+console.log(String(23), 23);
+
+//////////////////////////////////////
+// Coercion de tipo
+console.log('I am' + 23 + ' years old');
+console.log('23' + '10' + 3); // En el caso del operador + convierte a los numeros en string
+console.log('23' - '10' - 3); // En el caso del operador + convierte a los string en el numero
+console.log('23' / '2'); // Convierte el string en numeros
+
+let n = '1' + 1; // '11'
+n = n - 1;
+console.log(n);
