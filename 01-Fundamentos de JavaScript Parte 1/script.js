@@ -271,3 +271,29 @@ console.log('23' / '2'); // Convierte el string en numeros
 let n = '1' + 1; // '11'
 n = n - 1;
 console.log(n);
+
+///////////////////////////////////
+// Valores falsy y truthy
+
+// 5 valores falsy: 0, '', undefined, null, NaN
+
+console.log(Boolean(0)); // False
+console.log(Boolean(undefined)); // false
+console.log(Boolean('Jonas')); // True
+console.log(Boolean({})); // True
+console.log(Boolean('')); // False
+
+const money = 0;
+if (money) {
+	console.log("Don't spend it all");
+} else {
+	console.log("You should get a job");
+}
+
+let height;
+if (height) {
+	console.log('YAY! Height is a defined');
+} else {
+	console.log("Height is undefined")
+}
+
