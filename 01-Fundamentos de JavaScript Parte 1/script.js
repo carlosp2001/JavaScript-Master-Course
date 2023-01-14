@@ -297,3 +297,30 @@ if (height) {
 	console.log("Height is undefined")
 }
 
+//////////////////////////////////////
+// Operadores de Igualdad
+
+const age = 18;
+
+// El operador === devolvera true si solo tienen el exactamente el mismo valor
+if (age === 18) console.log('You are an adult');
+if (age === '18') console.log('Coercion') // Devuleve false porque no son el mismo tipo de valor
+
+// El operador == hace coercion de tipo por lo que sin importar si son strings nos devuelve true
+if (age == '18') console.log('Coercion') // Devuleve false porque no son el mismo tipo de valor
+
+const favourite = prompt("What's your favorite number?");
+console.log(typeof favourite);
+
+if (Number(favourite) === 23) { // 23 === 23
+	console.log('Cool 23 is an amazing number')
+} else if (favourite === 7) {
+	console.log('7 is a cool number');
+} else if (favourite === 9) {
+	console.log('9 is also a cool number');
+} else {
+	console.log('Number is not 23 or 7 or 9');
+}
+
+if (favourite !== 23) console.log('Why not 23?');
+
