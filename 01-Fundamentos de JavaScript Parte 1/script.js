@@ -447,3 +447,20 @@ if (day === 'monday') {
 } else {
 	console.log('Not a valid day');
 }
+
+///////////////////////////////////
+// Declaraciones y expresiones
+
+// Expresion es un pedazo de codigo que produce un valor / 3 + 4 / 1991 / true && false && !false
+// Declaraciones es un fragmento de codigo mas grande que se ejecuta y no produce un valor por si mismo
+
+// Declaracion ejemplo statement
+
+if (23 > 10) {
+	const str = '23 is bigger';
+}
+
+// el template literals solo admite expresiones, es decir que produzcan un valor
+
+const me = 'Jonas';
+console.log(`I'm ${2037 - 1991} years old ${me}.`);
