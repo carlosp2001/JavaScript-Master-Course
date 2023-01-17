@@ -66,6 +66,29 @@ const age2 = calcAge2();
 
 console.log(age1, age2);
 
+////////////////////////////////////////////////
+// Funcion flecha / Arrow Function
+
+// Funcion flecha / arrow function
+// La flecha funcion tiene una diferencia en comparacion de las demas y es que no obtiene una
+// de las llamadas esta palabra clave
+
+const calcAge4 = birthYear => 2037 - birthYear;
+const age4 = calcAge4(1991);
+console.log(age4);
+
+const yearsUntilRetirement = (birthYear, firstName) => {
+	const age = 2037 - birthYear;
+	const retirement = 65 - age;
+
+	return `${firstName} retires in ${retirement} years`;
+}
+
+console.log(yearsUntilRetirement(1991, 'Carlos'));
+console.log(yearsUntilRetirement(1991, 'Carlos'));
+
+
+
 
 
 
