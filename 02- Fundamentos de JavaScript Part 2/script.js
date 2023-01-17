@@ -40,3 +40,32 @@ console.log(appleOrangeJuice);
 // Built-in funcion ejemplo
 
 const num = Number('23');
+
+
+//////////////////////////////////////////////
+// Declaraciones de funciones vs expresiones
+
+// Declaracion de funcion / Function Declaration
+function calcAge1(birthYear) {
+	return 2037 - birthYear;
+}
+
+const age1 = calcAge1(1991);
+console.log(age);
+
+// Expresion de funcion / Otro tipo de funcion que existe / Funcion Anonima
+// No podemos llamarla antes de declararla mientras que en la declaracion de funcion si
+// funciona un llamado antes
+// Es preferible usar expresiones de funciones
+
+const calcAge2 = function (birthYear) {
+	return 2037 - birthYear;
+}
+
+const age2 = calcAge2();
+
+console.log(age1, age2);
+
+
+
+
