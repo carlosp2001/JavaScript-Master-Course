@@ -133,7 +133,7 @@ let scoreKoalas = calcAverage(65, 54, 49);
 console.log(scoreDolphins, scoreKoalas);
 
 const checkWinner = function (avgDolphins, avgKoalas) {
-	if (avgDolphins >= 2* avgKoalas ) {
+	if (avgDolphins >= 2 * avgKoalas) {
 		console.log(`Dolphins win (${avgDolphins})`);
 	} else if (avgKoalas >= 2 * avgDolphins) {
 		console.log(`Koalas win (${avgKoalas}) vs ${avgDolphins})`);
@@ -149,5 +149,51 @@ checkWinner(576, 111);
 scoreDolphins = calcAverage(85, 54, 41);
 scoreKoalas = calcAverage(23, 34, 27);
 console.log(scoreKoalas, scoreDolphins);
-checkWinner(scoreDolphins, scoreKoalas)
+checkWinner(scoreDolphins, scoreKoalas);
+
+///////////////////////////////////////////
+// Estructuras de datos
+
+// Arrays
+
+const friends = ['Michael', 'Steven', 'Peter'];
+console.log(friends);
+
+// Otra forma de crear arrays
+
+const years = new Array(1991, 1984, 2008, 2020);
+
+console.log(friends[2]);
+
+console.log(friends.length);
+console.log(friends[friends.length - 1]);
+
+friends[2] = 'Jay';
+console.log(friends);
+// No se puede declarar nuevamente un array, ya que está declarado como const pero si puedes
+// cambiar un elemento del array ya que este no se considera primitivo
+// friends = ['Bob', 'Alice']
+
+const firstName = 'Jonas';
+const jonas = ['Jonas', 'Schmedtmann', 2037 - 1991, 'teacher', friends];
+console.log(jonas);
+console.log(jonas.length);
+
+// Exercise
+const calcAgeArrays = function (birthYear) {
+	return 2037 - birthYear;
+}
+
+const y = [1990, 1967, 2002, 2010, 2018];
+
+// console.log(calcAgeArrays(y))
+const ageA1 = calcAgeArrays(years[0]);
+const ageA2 = calcAgeArrays(years[1]);
+const ageA3 = calcAgeArrays(years[years.length - 1]);
+console.log(ageA1, ageA2, ageA3);
+
+const ages = [calcAgeArrays(years[0]), calcAgeArrays(years[1]), calcAgeArrays(years[years.length - 1])];
+
+console.log(ages);
+
 
