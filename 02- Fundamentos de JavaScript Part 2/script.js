@@ -196,4 +196,45 @@ const ages = [calcAgeArrays(years[0]), calcAgeArrays(years[1]), calcAgeArrays(ye
 
 console.log(ages);
 
+/////////////////////////////////////
+// Operaciones basicas con arrays
+
+// Funciones integradas
+
+const friends1 = ['Michael', 'Steven', 'Peter'];
+
+// Push agrega elementos al final del array
+// Push nos puede devolver el valor nuevo del length del array
+const newLength = friends1.push('Jay');
+console.log(friends1);
+console.log(newLength);
+
+// Unshift funciona para agregar elementos al principio del arreglo, tambien nos devuelve el tamaño del arreglo
+friends1.unshift('Carlos')
+
+// Eliminar elementos
+// Pop: Elimina el ultimo elemento del arreglo
+const popped = friends1.pop(); // Nos devuelve el elemento eliminado
+
+friends1.shift(); // Eliminar el primer elemento del arreglo
+console.log(friends1);
+
+// indexOf nos devuelve el indice donde esta el elemento que buscamos
+console.log(friends1.indexOf('Steven'));
+console.log(friends1.indexOf('Bob')); // Si el elemento que buscamos no existe nos devuelve un -1
+
+friends1.push(23);
+// includes nos devuelve true or false si existe el elemento en el array
+console.log(friends1.includes('Steven')); // true
+console.log(friends1.includes('Bob')); // false
+console.log(friends1.includes('23'));// nos devolvera falso porque funciona de manera estricta, no existe coercion de
+// tipo
+
+if (friends1.includes('Steven')) {
+	console.log('You have a friend called Steven');
+}
+
+
+
+
 
