@@ -281,3 +281,31 @@ const jonasO = {
 	job: 'teacher',
 	friends: ['Michael', 'Peter', 'Steven']
 }
+
+console.log(jonasO);
+// Obtener la propiedad de un objeto
+console.log(jonasO.lastName);
+// Otra forma
+console.log(jonasO['lastName']);
+
+const nameKey = 'Name';
+console.log(jonasO['first' + nameKey]);
+console.log(jonasO['last' + nameKey]);
+
+const interestedIn = prompt('What do you want to know about Jonas? Choose between firstName lastName, age, job and friends');
+
+if (jonasO[interestedIn]) {
+	console.log(jonas[interestedIn]);
+} else {
+	console.log('Wrong request! Choose between firstName, lastName, age, job and friends')
+}
+
+// Agregar propiedades al objeto
+jonasO.location = 'Portugal';
+jonasO['twitter'] = '@jonasschedtmann';
+console.log(jonasO);
+
+// Challenge
+// Jonas has 3 friends, and his best friends is called Michael
+
+console.log(`${jonasO.firstName} has ${jonasO.friends.length} friends, and his best friends is called ${jonasO.friends[0]}`);
