@@ -407,6 +407,60 @@ console.log('Lifting weights repetition 6');
 console.log('Lifting weights repetition 7');
 
 // Iterador for loop, el for loop se mantiene corriendo mientras sea verdadera / true
-for (let rep = 1; rep <= 10; rep ++) {
+for (let rep = 1; rep <= 10; rep++) {
 	console.log(`Lifting weights repetition ${rep}`);
 }
+
+///////////////////////////////////////////
+// Loop en arreglos, break and continue
+
+const jonasArray = [
+	'Jonas',
+	'Shmedtmann',
+	2037 - 1991,
+	'teacher',
+	['Michael', 'Peter', 'Steven'],
+	true
+];
+
+const types = [];
+
+for (let i = 0; i < jonasArray.length; i++) {
+	console.log(jonasArray[i], typeof jonasArray[i])
+
+	// Llenando un array de tipos
+	// types[i] = typeof jonasArray[i];
+	types.push(typeof jonasArray[i])
+}
+
+types[0] = 'string';
+
+console.log(types);
+
+const years = [1991, 2007, 1969, 2020];
+const ages = [];
+
+for (let i = 0; i < years.length; i++) {
+	ages.push(2037 - years[i]);
+}
+console.log(ages);
+
+// continue y break
+// continue se salta a la siguiente iteracion y break se sale de la iteracion y continua con el
+// codigo
+console.log('------ONLY-STRINGS-------');
+for (let i = 0; i < jonasArray.length; i++) {
+	if (typeof jonasArray[i] !== 'string') continue;
+
+	console.log(jonasArray[i], typeof jonasArray[i])
+}
+
+console.log('------BREAK WITH NUMBER-------');
+for (let i = 0; i < jonasArray.length; i++) {
+	if (typeof jonasArray[i] === 'number') continue;
+	console.log(jonasArray[i], typeof jonasArray[i])
+}
+
+
+
+
