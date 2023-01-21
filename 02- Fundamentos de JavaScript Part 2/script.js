@@ -461,6 +461,34 @@ for (let i = 0; i < jonasArray.length; i++) {
 	console.log(jonasArray[i], typeof jonasArray[i])
 }
 
+/////////////////////////////////
+// Loops en reversa y loops dentro de otros loops
+
+const jonas2 = [
+	'Jonas',
+	'Shmedtmann',
+	2037 - 1991,
+	'teacher',
+	['Michael', 'Peter', 'Steven'],
+	true
+];
+
+// 0, 1 ....4
+// 4, 3, 2 ...0
+
+for (let i = jonasArray.length - 1; i >= 0; i--) {
+	console.log(i, jonasArray[i])
+}
+
+// Loop inside of a loop
+
+for (let exercise = 1; exercise < 4; exercise++) {
+	console.log(`------------ Starting exercise ${exercise} ------------`);
+
+	for (let rep = 1; rep < 6; rep++) {
+		console.log(`Exercise ${exercise}: Lifting weight repetition ${rep}`);
+	}
+}
 
 
 
