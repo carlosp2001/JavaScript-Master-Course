@@ -309,3 +309,88 @@ console.log(jonasO);
 // Jonas has 3 friends, and his best friends is called Michael
 
 console.log(`${jonasO.firstName} has ${jonasO.friends.length} friends, and his best friends is called ${jonasO.friends[0]}`);
+
+////////////////////////////////////
+// Metodos de objeto
+
+const jonas1 = {
+	firstName: 'Jonas',
+	lastName: 'Schmedtmann',
+	birthYear: 1991,
+	job: 'teacher',
+	friends: ['Michael', 'Peter', 'Steven'],
+	hasDriversLicense: true,
+	// calcAge: function (birthYear) {
+	// 	return 2037 - birthYear
+	// }
+
+	// Usando la funcion this para usar la propiedad de jonas1, con el uso de this podemos automatizar al momento de
+	// querer cambiar el nombre a la propiedad
+	// calcAge: function () {
+	// 	return 2037 - this.birthYear
+	// }
+
+	// Agregar una nueva propiedad mediante this
+	calcAge: function () {
+		this.age = 2037 - this.birthYear;
+		return this.age;
+	},
+
+	getSummary: () => {
+		return `${this.firstName} is a ${this.calcAge()}-year old ${this.job}, and he ${hasDriversLicense ? 'has' : 'has not'} a
+		driver license`;
+	}
+}
+
+// Sintaxis para llamar a la funcion dentro del objeto
+// console.log(jonas1.calcAge(1991));
+// console.log(jonas1['calcAge'](1991));
+
+
+console.log(jonas1['calcAge']());
+console.log(jonas1.age);
+console.log(jonas1.getSummary())
+
+// Challenge
+// "Jonas is a 46-year old teacher, and he has a driver license";
+
+
+//////////////////////////////////////////
+// Coding Challenge #3
+
+/*Let's go back to Mark and John comparing their BMIs! This time, let's use objects to implement the calculations! Remember: BMI = mass / height ** 2 = mass / (height * height) (mass in kg and height in meter)
+Your tasks:
+	1. Foreachofthem,createanobjectwithpropertiesfortheirfullname,mass,and height (Mark Miller and John Smith)
+2. Createa'calcBMI'methodoneachobjecttocalculatetheBMI(thesame method on both objects). Store the BMI value to a property, and also return it from the method
+3. LogtotheconsolewhohasthehigherBMI,togetherwiththefullnameandthe respective BMI. Example: "John's BMI (28.3) is higher than Mark's (23.9)!"
+Test data: Marks weights 78 kg and is 1.69 m tall. John weights 92 kg and is 1.95 m tall.
+	GOOD LUCK */
+
+const mark = {
+	fullName: 'Mark Miller',
+	mass: 78,
+	height: 1.69,
+	calcBMI: function () {
+		this.bmi = this.mass / this.height ** 2;
+		return this.bmi;
+	}
+};
+const john = {
+	fullName: 'John Smith',
+	mass: 92,
+	height: 1.95,
+	calcBMI: function () {
+		this.bmi = this.mass / this.height ** 2;
+		return this.bmi;
+	}
+};
+
+mark.calcBMI();
+john.calcBMI();
+console.log(mark.bmi, john.bmi);
+
+if (mark.bmi > john.bmi) {
+	console.log(`${mark.fullName}'s BMI (${mark.bmi}) is higher than ${john.fullName}'s BMI (${john.bmi})`);
+} else if (mark.bmi < john.bmi) {
+	console.log(`${john.fullName}'s BMI (${john.bmi}) is higher than ${mark.fullName}'s BMI (${mark.bmi})`);
+}

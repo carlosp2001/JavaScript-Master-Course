@@ -66,7 +66,7 @@ year = 1991;
 console.log(typeof year);
 
 // El valor null se considera un error, un error que nunca se corrige por razones heredadas
-console.log(typeof null);
+y
 
 
 // Let, const y var
