@@ -24,3 +24,11 @@ for (let i = 0; i < btnOpenModals.length; i++) {
 
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal)
+
+// Evento al presionar la tecla esc
+// keydown es cuando nosotros presionamos la tecla
+// keyup es cuando nosotros dejamos de presionar
+// keypress es cuando la mantenemos presionada
+document.addEventListener('keydown', (e) => {
+	if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+})
