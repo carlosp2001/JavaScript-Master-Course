@@ -184,3 +184,70 @@ var addArrow1 = (a, b) => {
 };
 
 addArrow1(2, 5, 8);
+
+////////////////////////////////////////////////////////////
+// Primitivos vs objetos (Primitivos vs tipos de referencia
+
+// Primitivos son numeros, strings, booleans, cadenas, etc
+
+let age = 30;
+let oldAge = age;
+age = 31;
+console.log(age);
+console.log(oldAge);
+
+const me1 = {
+	name: 'Jonas',
+	age: 30,
+
+};
+
+const friendObj = me;
+friendObj.age = 27;
+console.log('Friend:', friendObj);
+console.log('Me:', me);
+
+// Primitivos vs Objetos en práctica
+// Tipos primitivos
+let lastName = 'Williams';
+let oldLastName = 'Williams';
+lastName = "Davis";
+console.log(lastName, oldLastName);
+
+// Tipos de referencia
+const jessica = {
+	firstName: 'Jessica',
+	lastName: 'Williams',
+	age: 27
+};
+
+const marriedJessica = jessica;
+marriedJessica.lastName = 'Davis';
+console.log('Before marriage:', jessica);
+console.log('After marriage:', marriedJessica);
+
+// No podriamos cambiar el valor que se encuentra en el call stack solamente en heap memory, es por eso que no permite
+// asignar un nuevo valor al objeto
+// marriedJessica = {};
+
+// Copiando objetos
+const jessica2 = {
+	firstName: 'Jessica',
+	lastName: 'Williams',
+	age: 27,
+	family: ["Alice", 'Bob']
+};
+
+// La funcion object.assign funciona principalmente para fusionar dos objetos pero al hacerlo con uno vacio y el otro el
+// deseamos copiar no tendremos ningun problema en ello
+const jessicaCopy = Object.assign({}, jessica2);
+jessicaCopy.lastName = 'Davis';
+
+console.log('Before marriage:', jessica2.lastName);
+console.log('After marriage:', jessicaCopy.lastName);
+
+jessicaCopy.family.push('Mary');
+jessicaCopy.family.push('John');
+
+console.log('Before marriage:', jessica2.lastName);
+console.log('After marriage:', jessicaCopy.lastName);
