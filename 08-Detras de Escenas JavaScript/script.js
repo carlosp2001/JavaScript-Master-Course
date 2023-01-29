@@ -125,3 +125,62 @@ matilda.calcAge();
 
 const f = jonas.calcAge;
 f(); // Esta llamada nos devuelve el valor indefinido ya que es un llamado de funcion regular
+
+///////////////////////////////////////////
+// Funciones regulares vs funcion flecha
+
+var firstName = "Matilda";
+
+const jonasFunc = {
+	firstName: 'Jonas',
+	year: 1991,
+	calcAge: function () {
+		// Esta es la solucion para el llamado regular a una funcion, sería con el uso de this fuera y despues usando la
+		// variable self
+
+		// Solucion 1
+		// const self = this;
+		// console.log(this);
+		// console.log(2037 - this.year);
+		// const isMillennial = function () {
+		// 	// console.log(this.year >= 1981 && this.year <= 1996); // Nos retornara indefinido ya que el llamadp a la
+		// 	// funcion es regular, por lo tanto no tiene palabra clave this, aunque ocurra dentro de un metodo
+		// 	console.log(self);
+		// 	console.log(self.year >= 1981 && self.year <= 1996);
+		// };
+
+		// Solucion 2 con funcion flecha
+		const isMillennial = () => {
+			// console.log(this.year >= 1981 && this.year <= 1996); // Nos retornara indefinido ya que el llamadp a la
+			// funcion es regular, por lo tanto no tiene palabra clave this, aunque ocurra dentro de un metodo
+			console.log(this);
+			console.log(this.year >= 1981 && this.year <= 1996);
+		};
+
+		isMillennial();
+	},
+	// Al ser una funcion flecha no tiene palabra clave this, sino que hereda de su alcance padre, por lo que busca en
+	// el contexto global pero no encuentra ninguna variable llamada firstName
+	// greet: () => console.log(`Hey ${this.firstName}`)
+
+	// el problema se soluciona al usar una funcion regular
+	greet: function () {
+		console.log(`Hey ${this.firstName}`)
+	}
+};
+
+jonasFunc.greet();
+jonasFunc.calcAge();
+
+const addExpr1 = function (a, b) {
+	return a + b;
+}
+addExpr1(2, 5);
+
+// La palabra arguments solo existe en funciones regulares en expresiones de funcion
+var addArrow1 = (a, b) => {
+	console.log(arguments)
+	return a + b
+};
+
+addArrow1(2, 5, 8);
