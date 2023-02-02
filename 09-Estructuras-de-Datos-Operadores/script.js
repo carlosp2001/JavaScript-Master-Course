@@ -34,6 +34,10 @@ const restaurant = {
 	orderDelivery: function ({starterIndex = 1, mainIndex = 0, time = '20:00', address}) {
 		console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered 
 		Dto ${address} at ${time}`);
+	},
+
+	orderPasta: function (ing1, ing2, ing3) {
+		console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, ${ing3}`);
 	}
 };
 
@@ -119,3 +123,62 @@ const obj = {a1: 23, b1: 7, c1: 14};
 // Desestructuración de objetos anidados
 const {fri: {open: o, close: cl}} = openingHours;
 console.log(o, cl);
+
+
+////////////////////////////////////////
+// Operador de propagacion / Spread Operator
+
+const arr1 = [7, 8, 9];
+const badNewArr = [1, 2, arr1[0], arr1[1], arr1[2]];
+// Forma manual de hacerlo
+console.log(badNewArr);
+
+// Usando el operador de propagacion/ Spread Operator
+const newArr = [1, 2, ...arr1]
+console.log(newArr);
+
+// Imprimir individualmente los valores de un array
+console.log(...newArr);
+
+const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+console.log(newMenu);
+
+// Funciones principales del operador de propagacion
+const mainMenuCopy = [...restaurant.mainMenu];
+
+// Unir 2 arreglos / join 2 arrays
+const menuJ = [...restaurant.starterMenu ,...restaurant.mainMenu];
+console.log(menuJ);
+
+// Que son los iterables? Son cosas como todos los arreglos, cadenas, mapas o conjuntos, pero no los objetos
+
+// Iterables: arrays, cadenas, maps, conjuntos (sets). NO Objetos
+const str = 'Jonas';
+const letters = [...str, ' ', 'S.'];
+console.log(letters);
+console.log(...str);
+
+// Real world - example
+// const ingredients = [prompt('Let\'s make pasta! Ingredient 1?'),
+// 	prompt('Ingredient 2?'),
+// 	prompt('Ingredient 3?')];
+
+const ingredients = ['Tomatoes',
+	'Jam',
+	'Cheese']
+console.log(ingredients);
+
+// Forma manual
+restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2]);
+
+// Usando el operador de propagación
+restaurant.orderPasta(...ingredients);
+
+// Objetos: En los objetos al usar este operador simplemente agregamos las propiedades nuevas que declaramos
+const newRestaurant = {founding: 1998, ...restaurant, founder: 'Guiseppe'};
+console.log(newRestaurant);
+
+const restaurantCopy = {...restaurant};
+restaurantCopy.name = 'Ristorante Roma';
+console.log(restaurantCopy.name);
+console.log(restaurant.name);
