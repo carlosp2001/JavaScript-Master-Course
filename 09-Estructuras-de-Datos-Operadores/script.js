@@ -38,6 +38,11 @@ const restaurant = {
 
 	orderPasta: function (ing1, ing2, ing3) {
 		console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, ${ing3}`);
+	},
+
+	orderPizza: function (mainIngredient, ...otherIngredients) {
+		console.log(mainIngredient);
+		console.log(otherIngredients);
 	}
 };
 
@@ -182,3 +187,44 @@ const restaurantCopy = {...restaurant};
 restaurantCopy.name = 'Ristorante Roma';
 console.log(restaurantCopy.name);
 console.log(restaurant.name);
+
+//////////////////////////////////////////
+// Patron de descanso y parametros
+
+/// 1) DESESTRUCTURACION
+
+// El patron de descanso es similar al operador de propagacion por lo tanto tienen la misma sintaxis con los tres puntos
+// pero en realidad hace lo contrario del operador de propagacion
+
+// PROPACION / SPREAD, porque esta en lado derecho de =
+const arr2 = [1, 2, ...[3,4]]
+
+// DESCANSO / REST, porque esta en lado izquierdo de =
+const [a2, b3, ...others] = [1, 2, 3, 4, 5]
+
+// Ejemplo usando ambos operadores, el operador de descanso debe ser el ultimo
+const [pizza, , risotto, ...otherFood] = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(pizza, risotto, otherFood);
+console.log(pizza, risotto, otherFood);
+
+// Objetos / Usando el operador de descanso en objetos
+const {sat, ...weekdays} = restaurant.openingHours;
+console.log(weekdays);
+
+/// 2) Funciones
+const add = function (...numbers) {
+	let sum = 0;
+	for (let i = 0; i<numbers.length; i++) sum += numbers[i];
+	console.log(sum);
+}
+add(2, 3);
+add(5, 3, 7, 2);
+add(8, 2, 5, 3, 2, 1, 4);
+
+const x1 = [23, 5, 7];
+// Usando el operador de propagacion para enviar los parametros y recibiendolos con el operador de descanso en la
+// funcion
+add(...x1);
+
+restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
+restaurant.orderPizza('mushrooms');
