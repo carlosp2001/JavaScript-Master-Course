@@ -228,3 +228,39 @@ add(...x1);
 
 restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
 restaurant.orderPizza('mushrooms');
+
+
+////////////////////////////////////////
+// Short Cirtuiting (&& y ||)
+
+console.log('-----------OR----------');
+// Usan cualquier tipo de dato, puede retornar cualquier tipo de dato, evaluacion de cortocircuito
+// Si el primer valor es truthy value retornara ese de lo contrario evaluara el siguiente valor
+console.log(3 || 'Jonas');
+console.log('' || 'Jonas');
+console.log(true || 0);
+console.log(undefined || null);
+
+console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+
+// restaurant.numGuests = 23;
+const guests1 = restaurant.numGuests ?? 10;
+console.log(guests1);
+
+const guests2 = restaurant.numGuests || 10
+console.log(guests2);
+
+console.log('-----------AND----------');
+// En la evaluacion de cortocircuito el operador AND evaluara y cuando encuentre el primer valor falsy lo retornara
+console.log(0 && 'Jonas');
+console.log(7 && 'Jonas');
+
+console.log('Hello' && 23 && null && 'jonas');
+
+// Ejemplo practico
+if (restaurant.orderPizza) {
+	restaurant.orderPizza('mushrooms', 'spinach')
+}
+
+// Primeramente evalúa si la la funcion existe y si existe pues hace el llamado
+restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
