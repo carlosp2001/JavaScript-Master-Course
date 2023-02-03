@@ -264,3 +264,14 @@ if (restaurant.orderPizza) {
 
 // Primeramente evalúa si la la funcion existe y si existe pues hace el llamado
 restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
+
+//////////////////////////////////////////
+// Operador de fusión nula
+
+restaurant.numGuests = 0;
+const guests3 = restaurant.numGuests || 10;
+console.log(guests3);
+
+// Nullish: null and undefined (NOT 0 or '')
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(guestCorrect)
