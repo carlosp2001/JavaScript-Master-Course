@@ -396,5 +396,21 @@ printGoals('Davis', 'Muller', 'Lewandowski');
 printGoals(...game.scored);
 
 // 7.
-team1 < team2 && console.log('Team 1 is more likely to win')
-team1 > team2 && console.log('Team 2 is more likely to win')
+team1 < team2 && console.log('Team 1 is more likely to win');
+team1 > team2 && console.log('Team 2 is more likely to win');
+
+
+///////////////////////////////////////////////
+// For-of loop
+
+const menu3 = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+// El loop for-of recorre el array y nos devuelve cada objeto de este
+for (const item of menu3) console.log(item);
+
+// Para obtener el indice y el contenido de cada array, usamos desetructuracion en la iteracion para que nos devuelve
+// el menu y el elemento
+for (const [i, el] of menu3.entries()) console.log(`${i + 1}: ${el}`);
+
+// console.log([...menu3.entries()]);
+
