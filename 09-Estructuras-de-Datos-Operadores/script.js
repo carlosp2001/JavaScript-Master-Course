@@ -424,3 +424,39 @@ for (const [i, el] of menu3.entries()) console.log(`${i + 1}: ${el}`);
 ///////////////////////////////////////////////////////////
 // Literales de objeto mejorado (Enhanced object literals)
 
+///////////////////////////////////////////////////////////
+// Encadenamiento Opcional (Optional Chaining)
+
+// Queremos obtener la hora de apertura del objeto restaurante en dia Lunes
+// Usando if
+if (restaurant.openingHours && restaurant.openingHours.mon) console.log(restaurant.openingHours.mon.open);
+if (restaurant.openingHours.fri) console.log(restaurant.openingHours.fri.open);
+
+// Con Optional chaining
+console.log(restaurant.openingHours.mon?.open);
+console.log(restaurant.openingHours?.mon?.open);
+
+// Ejemplo
+
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+for (const day of days) {
+	console.log(day);
+	const open = restaurant.openingHours[day]?.open ?? 'closed';
+	console.log(`On ${day}, we open at ${open}`);
+}
+
+// Metodos en encadenamiento opcional
+console.log(restaurant.order?.(0,1) ?? 'Method does not exist');
+console.log(restaurant.orderRisotto?.(0,1) ?? 'Method does not exist');
+
+// Arrays
+const users = [
+	{
+		name: 'Jonas',
+		email: 'hello@jonas.io'
+	}
+]
+
+console.log(users[0]?.name ?? 'User array empty');
+
+if (users.length > 0) console.log(users[0].name); else console.log('User array empty');
