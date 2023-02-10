@@ -1,69 +1,73 @@
-'use strict';
+"use strict";
 
 // Data needed for a later exercise
 const flights =
-	'_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+  "_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30";
 
-const weekdays1 = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+const weekdays1 = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
 
 const openingHours = {
-	// ES6 objeto literal mejorado
-	[weekdays1[3]]: {
-		open: 12,
-		close: 22,
-	},
-	[weekdays1[4]]: {
-		open: 11,
-		close: 23,
-	},
-	[weekdays1[5]]: {
-		open: 0, // Open 24 hours
-		close: 24,
-	},
+  // ES6 objeto literal mejorado
+  [weekdays1[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [weekdays1[4]]: {
+    open: 11,
+    close: 23,
+  },
+  [weekdays1[5]]: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
 };
-
 
 // Data needed for first part of the section
 const restaurant = {
-	name: 'Classico Italiano',
-	location: 'Via Angelo Tavanti 23, Firenze, Italy',
-	categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
-	starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
-	mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-	// ES6 objeto literal mejorado
-	openingHours,
+  name: "Classico Italiano",
+  location: "Via Angelo Tavanti 23, Firenze, Italy",
+  categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
+  starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
+  mainMenu: ["Pizza", "Pasta", "Risotto"],
+  // ES6 objeto literal mejorado
+  openingHours,
 
-	// ES6 objeto literal mejorado
-	order(starterIndex, mainIndex) {
-		return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
-	},
+  // ES6 objeto literal mejorado
+  order(starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
 
-	orderDelivery: function ({starterIndex = 1, mainIndex = 0, time = '20:00', address}) {
-		console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered 
+  orderDelivery: function ({
+    starterIndex = 1,
+    mainIndex = 0,
+    time = "20:00",
+    address,
+  }) {
+    console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered 
 		Dto ${address} at ${time}`);
-	},
+  },
 
-	orderPasta: function (ing1, ing2, ing3) {
-		console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, ${ing3}`);
-	},
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, ${ing3}`);
+  },
 
-	orderPizza: function (mainIngredient, ...otherIngredients) {
-		console.log(mainIngredient);
-		console.log(otherIngredients);
-	}
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
 };
 
 restaurant.orderDelivery({
-	time: '22:30',
-	address: 'Via del Sole, 21',
-	mainIndex: 2,
-	starterIndex: 2
+  time: "22:30",
+  address: "Via del Sole, 21",
+  mainIndex: 2,
+  starterIndex: 2,
 });
 
 restaurant.orderDelivery({
-	address: 'Via del Sole, 21',
-	starterIndex: 2
-})
+  address: "Via del Sole, 21",
+  starterIndex: 2,
+});
 
 /////////////////////////////////////
 // Desestructuración de arreglos
@@ -89,7 +93,7 @@ console.log(main, secondary);
 // console.log(main, secondary);
 
 [main, secondary] = [secondary, main];
-console.log(main, secondary)
+console.log(main, secondary);
 
 // Recibir dos valores en return de una funcion
 const [starter, mainCourse] = restaurant.order(2, 0);
@@ -111,31 +115,35 @@ console.log(p, q, r);
 ////////////////////////////////////
 // Desestructuración de objetos
 
-const {name, openingHoursObj, categories} = restaurant;
+const { name, openingHoursObj, categories } = restaurant;
 console.log(name, openingHoursObj, categories);
 
 // Asignarle nuevos nombres a las variables que obtenemos mediante la desestructuracion
-const {name: restaurantName, openingHours: hours, categories: tags} = restaurant;
+const {
+  name: restaurantName,
+  openingHours: hours,
+  categories: tags,
+} = restaurant;
 console.log(restaurantName, hours, tags);
 
 // Default values en desestructuracion
-const {menu = [], starterMenu: starters = []} = restaurant;
-console.log('\n', menu, starters);
+const { menu = [], starterMenu: starters = [] } = restaurant;
+console.log("\n", menu, starters);
 
 // Mutando variables
 let a1 = 1;
 let b1 = 999;
-const obj = {a1: 23, b1: 7, c1: 14};
+const obj = { a1: 23, b1: 7, c1: 14 };
 
 // Para obtener los valores de variables previamente declaradas hacemos uso de los parentesis, esto para declarar que no
 // es un bloque de codigo el que estamos usando
-({a1, b1} = obj);
-
+({ a1, b1 } = obj);
 
 // Desestructuración de objetos anidados
-const {fri: {open: o, close: cl}} = openingHours;
+const {
+  fri: { open: o, close: cl },
+} = openingHours;
 console.log(o, cl);
-
 
 ////////////////////////////////////////
 // Operador de propagacion / Spread Operator
@@ -146,13 +154,13 @@ const badNewArr = [1, 2, arr1[0], arr1[1], arr1[2]];
 console.log(badNewArr);
 
 // Usando el operador de propagacion/ Spread Operator
-const newArr = [1, 2, ...arr1]
+const newArr = [1, 2, ...arr1];
 console.log(newArr);
 
 // Imprimir individualmente los valores de un array
 console.log(...newArr);
 
-const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+const newMenu = [...restaurant.mainMenu, "Gnocci"];
 console.log(newMenu);
 
 // Funciones principales del operador de propagacion
@@ -165,8 +173,8 @@ console.log(menuJ);
 // Que son los iterables? Son cosas como todos los arreglos, cadenas, mapas o conjuntos, pero no los objetos
 
 // Iterables: arrays, cadenas, maps, conjuntos (sets). NO Objetos
-const str = 'Jonas';
-const letters = [...str, ' ', 'S.'];
+const str = "Jonas";
+const letters = [...str, " ", "S."];
 console.log(letters);
 console.log(...str);
 
@@ -175,9 +183,7 @@ console.log(...str);
 // 	prompt('Ingredient 2?'),
 // 	prompt('Ingredient 3?')];
 
-const ingredients = ['Tomatoes',
-	'Jam',
-	'Cheese']
+const ingredients = ["Tomatoes", "Jam", "Cheese"];
 console.log(ingredients);
 
 // Forma manual
@@ -187,11 +193,11 @@ restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2]);
 restaurant.orderPasta(...ingredients);
 
 // Objetos: En los objetos al usar este operador simplemente agregamos las propiedades nuevas que declaramos
-const newRestaurant = {founding: 1998, ...restaurant, founder: 'Guiseppe'};
+const newRestaurant = { founding: 1998, ...restaurant, founder: "Guiseppe" };
 console.log(newRestaurant);
 
-const restaurantCopy = {...restaurant};
-restaurantCopy.name = 'Ristorante Roma';
+const restaurantCopy = { ...restaurant };
+restaurantCopy.name = "Ristorante Roma";
 console.log(restaurantCopy.name);
 console.log(restaurant.name);
 
@@ -204,26 +210,29 @@ console.log(restaurant.name);
 // pero en realidad hace lo contrario del operador de propagacion
 
 // PROPACION / SPREAD, porque esta en lado derecho de =
-const arr2 = [1, 2, ...[3, 4]]
+const arr2 = [1, 2, ...[3, 4]];
 
 // DESCANSO / REST, porque esta en lado izquierdo de =
-const [a2, b3, ...others] = [1, 2, 3, 4, 5]
+const [a2, b3, ...others] = [1, 2, 3, 4, 5];
 
 // Ejemplo usando ambos operadores, el operador de descanso debe ser el ultimo
-const [pizza, , risotto, ...otherFood] = [...restaurant.mainMenu, ...restaurant.starterMenu];
+const [pizza, , risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
 console.log(pizza, risotto, otherFood);
 console.log(pizza, risotto, otherFood);
 
 // Objetos / Usando el operador de descanso en objetos
-const {sat, ...weekdays} = restaurant.openingHours;
+const { sat, ...weekdays } = restaurant.openingHours;
 console.log(weekdays);
 
 /// 2) Funciones
 const add = function (...numbers) {
-	let sum = 0;
-	for (let i = 0; i < numbers.length; i++) sum += numbers[i];
-	console.log(sum);
-}
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) sum += numbers[i];
+  console.log(sum);
+};
 add(2, 3);
 add(5, 3, 7, 2);
 add(8, 2, 5, 3, 2, 1, 4);
@@ -233,44 +242,43 @@ const x1 = [23, 5, 7];
 // funcion
 add(...x1);
 
-restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
-restaurant.orderPizza('mushrooms');
-
+restaurant.orderPizza("mushrooms", "onion", "olives", "spinach");
+restaurant.orderPizza("mushrooms");
 
 ////////////////////////////////////////
 // Short Cirtuiting (&& y ||)
 
-console.log('-----------OR----------');
+console.log("-----------OR----------");
 // Usan cualquier tipo de dato, puede retornar cualquier tipo de dato, evaluacion de cortocircuito
 // Si el primer valor es truthy value retornara ese de lo contrario evaluara el siguiente valor
-console.log(3 || 'Jonas');
-console.log('' || 'Jonas');
+console.log(3 || "Jonas");
+console.log("" || "Jonas");
 console.log(true || 0);
 console.log(undefined || null);
 
-console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+console.log(undefined || 0 || "" || "Hello" || 23 || null);
 
 // restaurant.numGuests = 23;
 const guests1 = restaurant.numGuests ?? 10;
 console.log(guests1);
 
-const guests2 = restaurant.numGuests || 10
+const guests2 = restaurant.numGuests || 10;
 console.log(guests2);
 
-console.log('-----------AND----------');
+console.log("-----------AND----------");
 // En la evaluacion de cortocircuito el operador AND evaluara y cuando encuentre el primer valor falsy lo retornara
-console.log(0 && 'Jonas');
-console.log(7 && 'Jonas');
+console.log(0 && "Jonas");
+console.log(7 && "Jonas");
 
-console.log('Hello' && 23 && null && 'jonas');
+console.log("Hello" && 23 && null && "jonas");
 
 // Ejemplo practico
 if (restaurant.orderPizza) {
-	restaurant.orderPizza('mushrooms', 'spinach')
+  restaurant.orderPizza("mushrooms", "spinach");
 }
 
 // Primeramente evalúa si la la funcion existe y si existe pues hace el llamado
-restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
+restaurant.orderPizza && restaurant.orderPizza("mushrooms", "spinach");
 
 //////////////////////////////////////////////
 // Operador de fusión nula
@@ -281,22 +289,20 @@ console.log(guests3);
 
 // Nullish: null and undefined (NOT 0 or '')
 const guestCorrect = restaurant.numGuests ?? 10;
-console.log(guestCorrect)
+console.log(guestCorrect);
 
 /////////////////////////////////////////////
 // Operadores de asignación lógica
 
 const rest1 = {
-	name: 'Capri',
-	//numGuests: 20,
-	numGuests: 0
-
+  name: "Capri",
+  //numGuests: 20,
+  numGuests: 0,
 };
 
 const rest2 = {
-	name: 'La Pizza',
-	owner: 'Giovanni Rossi'
-
+  name: "La Pizza",
+  owner: "Giovanni Rossi",
 };
 
 // OR operador de asignación
@@ -313,8 +319,8 @@ rest2.numGuests ??= 10;
 // AND operador de asignación
 rest1.owner = rest1.owner && "<ANONYMUS>";
 rest2.owner = rest2.owner && "<ANONYMUS>";
-rest1.owner &&= '<ANONYMUS>';
-rest2.owner &&= '<ANONYMUS>';
+rest1.owner &&= "<ANONYMUS>";
+rest2.owner &&= "<ANONYMUS>";
 
 console.log(rest1);
 console.log(rest2);
@@ -341,41 +347,44 @@ GOOD LUCK 😀
  */
 
 const game = {
-	team1: 'Bayern Munich', team2: 'Borrussia Dortmund', players: [
-		[
-			'Neuer',
-			'Pavard',
-			'Martinez',
-			'Alaba',
-			'Davies',
-			'Kimmich',
-			'Goretzka',
-			'Coman',
-			'Muller',
-			'Gnarby',
-			'Lewandowski',
-		], [
-			'Burki',
-			'Schulz',
-			'Hummels',
-			'Akanji',
-			'Hakimi',
-			'Weigl',
-			'Witsel',
-			'Hazard',
-			'Brandt',
-			'Sancho',
-			'Gotze',
-		],],
-	score: '4:0',
-	scored: ['Lewandowski', 'Gnarby', 'Lewandowski',
-		'Hummels'],
-	date: 'Nov 9th, 2037',
-	odds: {
-		team1: 1.33,
-		x: 3.25,
-		team2: 6.5,
-	},
+  team1: "Bayern Munich",
+  team2: "Borrussia Dortmund",
+  players: [
+    [
+      "Neuer",
+      "Pavard",
+      "Martinez",
+      "Alaba",
+      "Davies",
+      "Kimmich",
+      "Goretzka",
+      "Coman",
+      "Muller",
+      "Gnarby",
+      "Lewandowski",
+    ],
+    [
+      "Burki",
+      "Schulz",
+      "Hummels",
+      "Akanji",
+      "Hakimi",
+      "Weigl",
+      "Witsel",
+      "Hazard",
+      "Brandt",
+      "Sancho",
+      "Gotze",
+    ],
+  ],
+  score: "4:0",
+  scored: ["Lewandowski", "Gnarby", "Lewandowski", "Hummels"],
+  date: "Nov 9th, 2037",
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
 };
 
 // 1.
@@ -388,24 +397,25 @@ const [gk, ...fieldplayers] = players1;
 const allPlayers = [...players1, ...players2];
 
 // 4.
-const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic']
+const players1Final = [...players1, "Thiago", "Coutinho", "Perisic"];
 
 // 5.
-const {odds: {team1, x: draw, team2}} = game;
+const {
+  odds: { team1, x: draw, team2 },
+} = game;
 console.log(team1, draw, team2);
 
 // 6.
 const printGoals = function (...players) {
-	console.log(`${players.length} goals were scored`);
-}
+  console.log(`${players.length} goals were scored`);
+};
 
-printGoals('Davis', 'Muller', 'Lewandowski');
+printGoals("Davis", "Muller", "Lewandowski");
 printGoals(...game.scored);
 
 // 7.
-team1 < team2 && console.log('Team 1 is more likely to win');
-team1 > team2 && console.log('Team 2 is more likely to win');
-
+team1 < team2 && console.log("Team 1 is more likely to win");
+team1 > team2 && console.log("Team 2 is more likely to win");
 
 ///////////////////////////////////////////////
 // For-of loop
@@ -429,7 +439,8 @@ for (const [i, el] of menu3.entries()) console.log(`${i + 1}: ${el}`);
 
 // Queremos obtener la hora de apertura del objeto restaurante en dia Lunes
 // Usando if
-if (restaurant.openingHours && restaurant.openingHours.mon) console.log(restaurant.openingHours.mon.open);
+if (restaurant.openingHours && restaurant.openingHours.mon)
+  console.log(restaurant.openingHours.mon.open);
 if (restaurant.openingHours.fri) console.log(restaurant.openingHours.fri.open);
 
 // Con Optional chaining
@@ -438,28 +449,29 @@ console.log(restaurant.openingHours?.mon?.open);
 
 // Ejemplo
 
-const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
 for (const day of days) {
-	console.log(day);
-	const open = restaurant.openingHours[day]?.open ?? 'closed';
-	console.log(`On ${day}, we open at ${open}`);
+  console.log(day);
+  const open = restaurant.openingHours[day]?.open ?? "closed";
+  console.log(`On ${day}, we open at ${open}`);
 }
 
 // Metodos en encadenamiento opcional
-console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
-console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist');
+console.log(restaurant.order?.(0, 1) ?? "Method does not exist");
+console.log(restaurant.orderRisotto?.(0, 1) ?? "Method does not exist");
 
 // Arrays
 const users = [
-	{
-		name: 'Jonas',
-		email: 'hello@jonas.io'
-	}
-]
+  {
+    name: "Jonas",
+    email: "hello@jonas.io",
+  },
+];
 
-console.log(users[0]?.name ?? 'User array empty');
+console.log(users[0]?.name ?? "User array empty");
 
-if (users.length > 0) console.log(users[0].name); else console.log('User array empty');
+if (users.length > 0) console.log(users[0].name);
+else console.log("User array empty");
 
 //////////////////////////////////////////////////////////////
 // Objetos Iteradores: Llaves de objetos, valores y entradas
@@ -472,7 +484,7 @@ console.log(properties);
 let openStr = `We are open on ${properties.length} days: `;
 
 for (const day of Object.keys(openingHours)) openStr += `${day}, `;
-console.log(openStr)
+console.log(openStr);
 
 // Propiedad Valores
 const values = Object.values(openingHours);
@@ -482,8 +494,8 @@ console.log(values);
 const entries = Object.entries(openingHours);
 console.log(entries);
 
-for (const [day, {open, close}] of entries) {
-	console.log(`On ${day} we open at ${open} and close at ${close}`);
+for (const [day, { open, close }] of entries) {
+  console.log(`On ${day} we open at ${open} and close at ${close}`);
 }
 
 ///////////////////////////////////////
@@ -512,32 +524,31 @@ GOOD LUCK 😀
 
 // 1.
 for (const [i, player] of game.scored.entries()) {
-	console.log(`Goal ${i + 1}: ${player}`);
+  console.log(`Goal ${i + 1}: ${player}`);
 }
 
 // 2.
 const odds = Object.values(game.odds);
 let average = 0;
-for (const odd of odds)
-	average += odd;
+for (const odd of odds) average += odd;
 
 average /= odds.length;
 console.log(average);
 
 // 3.
 for (const [team, odd] of Object.entries(game.odds)) {
-	const teamStr = team === 'x' ? 'draw' : `victory ${game[team]}`
-	console.log(`Odd of ${teamStr}... ${odd}`);
+  const teamStr = team === "x" ? "draw" : `victory ${game[team]}`;
+  console.log(`Odd of ${teamStr}... ${odd}`);
 }
 
 // Odd of victory Bayern Munich: 1.33
 // Odd of draw: 3.25
 // Odd of victory Borrussia Dortmund: 6.5
 
-const scorers = {}
+const scorers = {};
 // Bonus
 for (const player of game.scored) {
-	scorers[player] ? scorers[player]++ : (scorers[player] = 1);
+  scorers[player] ? scorers[player]++ : (scorers[player] = 1);
 }
 console.log(scorers);
 
@@ -547,19 +558,26 @@ console.log(scorers);
 // Un set o conjunto es una colección de valores únicos, eso significa que un set o conjunto no puede tener valores
 // duplicados
 
-const ordersSet = new Set(['Pasta', 'Pizza', 'Pizza', 'Risotto', 'Pasta', 'Pizza']);
+const ordersSet = new Set([
+  "Pasta",
+  "Pizza",
+  "Pizza",
+  "Risotto",
+  "Pasta",
+  "Pizza",
+]);
 console.log(ordersSet);
 
-console.log(new Set('Carlos'));
+console.log(new Set("Carlos"));
 
 console.log(ordersSet.size);
-console.log(ordersSet.has('Pizza'));
-console.log(ordersSet.has('Bread'));
-ordersSet.add('Garlic Bread');
-ordersSet.add('Garlic Bread');
-ordersSet.delete('Risotto');
+console.log(ordersSet.has("Pizza"));
+console.log(ordersSet.has("Bread"));
+ordersSet.add("Garlic Bread");
+ordersSet.add("Garlic Bread");
+ordersSet.delete("Risotto");
 // ordersSet.clear();
-console.log(ordersSet)
+console.log(ordersSet);
 
 // Sets son tambien iterables
 
@@ -567,12 +585,51 @@ for (const order of ordersSet) console.log(order);
 
 // Example
 
-const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+const staff = ["Waiter", "Chef", "Waiter", "Manager", "Chef", "Waiter"];
 const staffUnique = [...new Set(staff)];
 console.log(staffUnique);
-console.log(new Set(['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).size);
+console.log(
+  new Set(["Waiter", "Chef", "Waiter", "Manager", "Chef", "Waiter"]).size
+);
 
 // Cantidad de letras diferentes en una palabra
-console.log(new Set('jonasschmedtmann').size);
+console.log(new Set("jonasschmedtmann").size);
 
+////////////////////////////////////////////////
+// Maps
+
+const rest = new Map();
+rest.set("name", "Classico Italiano");
+rest.set(1, "Firenze, Italy");
+console.log(rest.set(2, "Lisbon, Portugal"));
+
+rest
+  .set("categories", ["Italian", "Pizzeria", "Vegetarian", "Organic"])
+  .set("open", 11)
+  .set("close", 23)
+  .set(true, "We are open");
+
+console.log(rest.get("name"));
+console.log(rest.get(true));
+console.log(rest.get(1));
+
+const time = 21;
+console.log(rest.get(time > rest.get("open") && time < rest.get("close")));
+
+console.log(rest.has('categories'));
+rest.delete(2);
+console.log(rest);
+console.log(rest.size);
+
+// Eliminar todo el contenido del mapa
+//rest.clear();
+console.log(rest.size);
+
+const arrRest = [1, 2]
+rest.set(arrRest, 'Test');
+// rest.set(document.querySelector('h1'), 'Heading');
+console.log(rest);
+console.log(rest.size);
+
+console.log(rest.get(arrRest));
 
