@@ -540,3 +540,39 @@ for (const player of game.scored) {
 	scorers[player] ? scorers[player]++ : (scorers[player] = 1);
 }
 console.log(scorers);
+
+//////////////////////////////////////////
+// Sets / Conjuntos
+
+// Un set o conjunto es una colección de valores únicos, eso significa que un set o conjunto no puede tener valores
+// duplicados
+
+const ordersSet = new Set(['Pasta', 'Pizza', 'Pizza', 'Risotto', 'Pasta', 'Pizza']);
+console.log(ordersSet);
+
+console.log(new Set('Carlos'));
+
+console.log(ordersSet.size);
+console.log(ordersSet.has('Pizza'));
+console.log(ordersSet.has('Bread'));
+ordersSet.add('Garlic Bread');
+ordersSet.add('Garlic Bread');
+ordersSet.delete('Risotto');
+// ordersSet.clear();
+console.log(ordersSet)
+
+// Sets son tambien iterables
+
+for (const order of ordersSet) console.log(order);
+
+// Example
+
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+const staffUnique = [...new Set(staff)];
+console.log(staffUnique);
+console.log(new Set(['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).size);
+
+// Cantidad de letras diferentes en una palabra
+console.log(new Set('jonasschmedtmann').size);
+
+
