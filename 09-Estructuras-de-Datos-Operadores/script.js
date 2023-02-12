@@ -616,7 +616,7 @@ console.log(rest.get(1));
 const time = 21;
 console.log(rest.get(time > rest.get("open") && time < rest.get("close")));
 
-console.log(rest.has('categories'));
+console.log(rest.has("categories"));
 rest.delete(2);
 console.log(rest);
 console.log(rest.size);
@@ -625,8 +625,8 @@ console.log(rest.size);
 //rest.clear();
 console.log(rest.size);
 
-const arrRest = [1, 2]
-rest.set(arrRest, 'Test');
+const arrRest = [1, 2];
+rest.set(arrRest, "Test");
 // rest.set(document.querySelector('h1'), 'Heading');
 console.log(rest);
 console.log(rest.size);
@@ -636,13 +636,13 @@ console.log(rest.get(arrRest));
 // Iteracion con mapas
 
 const question = new Map([
-    ['question', 'What is the best programming language in the world?'],
-    [1, 'C'],
-    [2, 'Java'],
-    [3, 'JavaScript'],
-    ['correct', 3],
-    [true, 'Correct'],
-    [false, 'Try again!']
+  ["question", "What is the best programming language in the world?"],
+  [1, "C"],
+  [2, "Java"],
+  [3, "JavaScript"],
+  ["correct", 3],
+  [true, "Correct"],
+  [false, "Try again!"],
 ]);
 
 console.log(question);
@@ -653,14 +653,14 @@ const hoursMap = new Map(Object.entries(openingHours));
 console.log(hoursMap);
 
 // Quiz App
-console.log(question.get('question'));
+console.log(question.get("question"));
 for (const [key, value] of question) {
-  if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+  if (typeof key === "number") console.log(`Answer ${key}: ${value}`);
 }
 
 const answer = 3;
 console.log(answer);
-console.log(question.get(question.get('correct') === answer));
+console.log(question.get(question.get("correct") === answer));
 
 // Convertir mapa en arreglo
 console.log([...question]);
@@ -684,56 +684,58 @@ GOOD LUCK 😀
 */
 
 const gameEvents = new Map([
-  [17, '⚽️ GOAL'],
-  [36, '🔁 Substitution'],
-  [47, '⚽️ GOAL'],
-  [61, '🔁 Substitution'],
-  [64, '🔶 Yellow card'],
-  [69, '🔴 Red card'],
-  [70, '🔁 Substitution'],
-  [72, '🔁 Substitution'],
-  [76, '⚽️ GOAL'],
-  [80, '⚽️ GOAL'],
-  [92, '🔶 Yellow card'],
+  [17, "⚽️ GOAL"],
+  [36, "🔁 Substitution"],
+  [47, "⚽️ GOAL"],
+  [61, "🔁 Substitution"],
+  [64, "🔶 Yellow card"],
+  [69, "🔴 Red card"],
+  [70, "🔁 Substitution"],
+  [72, "🔁 Substitution"],
+  [76, "⚽️ GOAL"],
+  [80, "⚽️ GOAL"],
+  [92, "🔶 Yellow card"],
 ]);
 
 // 1.
 const events = [...new Set(gameEvents.values())];
-console.log(events)
+console.log(events);
 
 // 2.
 gameEvents.delete(64);
 
 // 3.
 const time1 = [...gameEvents.keys()].pop();
-console.log(`An event happened, on average, every ${time1 / gameEvents.size} minutes`);
+console.log(
+  `An event happened, on average, every ${time1 / gameEvents.size} minutes`
+);
 
 // 4.
 for (const [min, event] of gameEvents) {
-  const half = min <= 45 ? 'FIRST' : 'SECOND';
+  const half = min <= 45 ? "FIRST" : "SECOND";
   console.log(`[${half}] ${min}: ${event}`);
 }
 
 ////////////////////////////////////////////
 // Trabajando con cadenas
 
-const airline = 'TAP Air Portugal';
-const plane = 'A320';
+const airline = "TAP Air Portugal";
+const plane = "A320";
 
 console.log(plane[0]);
 console.log(plane[1]);
 console.log(plane[2]);
-console.log('B737'[0]);
+console.log("B737"[0]);
 console.log(airline.length);
-console.log('B737'.length);
-console.log(airline.lastIndexOf('r'));
-console.log(airline.indexOf('Portugal'));
+console.log("B737".length);
+console.log(airline.lastIndexOf("r"));
+console.log(airline.indexOf("Portugal"));
 
 console.log(airline.slice(4));
 console.log(airline.slice(4, 7));
 
-console.log(airline.slice(0, airline.indexOf(' ')));
-console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+console.log(airline.slice(0, airline.indexOf(" ")));
+console.log(airline.slice(airline.lastIndexOf(" ") + 1));
 
 console.log(airline.slice(-2));
 console.log(airline.slice(1, -1));
@@ -741,15 +743,72 @@ console.log(airline.slice(1, -1));
 const checkMiddleSeat = function (seat) {
   // B y E son los asientos de en medio
   const s = seat.slice(-1);
-  if (s === 'B' || s === 'E')
-    console.log('You got the middle seat');
-  else console.log('You got lucky')
+  if (s === "B" || s === "E") console.log("You got the middle seat");
+  else console.log("You got lucky");
+};
+
+checkMiddleSeat("11B");
+checkMiddleSeat("23C");
+checkMiddleSeat("3E");
+
+console.log(new String("jonas"));
+console.log(typeof new String("jonas"));
+console.log(typeof new String("jonas").slice(1));
+
+console.log(airline.toLowerCase());
+console.log("jonas".toUpperCase());
+
+// Reparar capitalización en nu nombre
+const passenger = "jOnAs"; // Jonas
+const passengerLower = passenger.toLowerCase();
+const passengerCorrect =
+  passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCorrect);
+
+// comparing email
+const email = "hello@jonas.io";
+const loginEmail = "    Hello@Jonas.Io  \n";
+
+const lowerEmail = loginEmail.toLowerCase();
+const trimmedEmail = lowerEmail.trim();
+console.log(trimmedEmail);
+
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+console.log(email === normalizedEmail);
+
+// reemplazando
+const priceGB = "288,97^";
+const priceUS = priceGB.replace(",", ".").replace("^", "$x");
+console.log(priceUS);
+
+const announcement =
+  "All passengers come to barding door 23. Boarding at door 23!";
+
+console.log(announcement.replace("door", "gate"));
+console.log(announcement.replaceAll("door", "gate"));
+console.log(announcement.replace(/door/g, "gate"));
+
+// Booleans
+const planeB = "Airbus A320neo";
+console.log(planeB.includes("A320"));
+console.log(planeB.includes("Boeing"));
+console.log(planeB.startsWith("Air"));
+
+if (planeB.startsWith("Airbus") && planeB.endsWith("neo")) {
+  console.log("Part of the NewAirbus Family");
 }
 
-checkMiddleSeat('11B');
-checkMiddleSeat('23C');
-checkMiddleSeat('3E');
+// Practice exercise
+const checkBaggage = function (items) {
+  const baggage = items.toLowerCase();
+  if (baggage.includes("knife") || baggage.includes("gun")) {
+    console.log("You're not allowed on board");
+  }else {
+    console.log('Welcome aboard!')
+  }
+};
 
-console.log(new String('jonas'));
-console.log(typeof new String('jonas'));
-console.log(typeof new String('jonas').slice(1));
+checkBaggage("I have a laptop, some Food and a pocket Knife");
+checkBaggage("Socks and camera");
+checkBaggage("Got some snacks and a gun for protection");
