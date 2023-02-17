@@ -103,4 +103,24 @@ const high5 = function () {
 
 document.body.addEventListener('click', high5);
 
-['Jonas', 'Marta', 'Adam'].forEach(high5)
+['Jonas', 'Marta', 'Adam'].forEach(high5);
+
+
+///////////////////////////////////////////////////////////////////
+// Funciones retornando funciones / functions returning functions
+
+const greet = function (greeting) {
+	return function (name) {
+		console.log(`${greeting} ${name}`)
+	}
+}
+
+const greeterHey = greet('Hey');
+greeterHey('Jonas');
+greeterHey('Steven');
+
+greet('Hello')('Jonas');
+
+// Challenge: Reescribir la función en arrow function
+const greetArr = greeting => name => console.log(`${greeting} ${name}`);
+greetArr('Hi')('Jonas');
