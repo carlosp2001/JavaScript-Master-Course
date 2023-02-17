@@ -73,3 +73,34 @@ las funciones son simples valores, funciones son solo otro tipo de objeto
 Que es una función de orden superior? Es una funcion que recibe otra funcion como argumento, que retorna una nueva
 función o ambas.
  */
+
+/////////////////////////////////////////////////////////////
+// Funciones aceptando llamados de funciones
+
+const oneWord = function (str) {
+	return str.replace(/ /g, '').toLowerCase();
+}
+
+const upperFirstWord = function (str) {
+	const [first, ...others ] = str.split(' ');
+	return [first.toUpperCase(), ...others].join(' ');
+}
+
+// High Order Function / Funcion de orden superior
+const transformer = function (str, fn) {
+	console.log(`Original String: ${str}`)
+	console.log(`Transformed string: ${fn(str)}`);
+	console.log(`Transformed by: ${fn.name}`);
+}
+
+transformer('JavaScript is the best', upperFirstWord);
+transformer('JavaScript is the best', oneWord);
+
+// JS usa callbacks todo el tiempo
+const high5 = function () {
+	console.log('Hi!')
+}
+
+document.body.addEventListener('click', high5);
+
+['Jonas', 'Marta', 'Adam'].forEach(high5)
