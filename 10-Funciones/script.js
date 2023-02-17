@@ -61,3 +61,15 @@ const newPassport = function (person) {
 
 newPassport(jonas);
 checkIn(flight, jonas);
+
+
+//////////////////////////////////////////////////////////////
+// Funciones de primera clase / Funciones de orden superior
+
+/*
+Que son las funciones de primera clase? JavaScript llama a las funciones como primeros ciudadanos, esto significa que
+las funciones son simples valores, funciones son solo otro tipo de objeto
+
+Que es una función de orden superior? Es una funcion que recibe otra funcion como argumento, que retorna una nueva
+función o ambas.
+ */
