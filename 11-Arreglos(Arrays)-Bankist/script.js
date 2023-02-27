@@ -120,6 +120,20 @@ const createUsernames = (accs) => {
 createUsernames(accounts); // stw
 console.log(accounts);
 
+// Event handler
+let currentAccount;
+
+btnLogin.addEventListener("click", (e) => {
+  // Esto evitará que la página ser recargue al ser un button al que le daremos click
+  // Prevenimos la sumisión del form
+  e.preventDefault();
+  console.log("LOGIN");
+  currentAccount = accounts.find(
+    (acc) => acc.username === inputLoginUsername.value
+  );
+  console.log(currentAccount);
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -430,11 +444,10 @@ console.log(avgA1, avgA2);
 /////////////////////////////////////////////
 // El método find
 
-const firstWithdrawal = movements.find(mov => mov < 0);
+const firstWithdrawal = movements.find((mov) => mov < 0);
 console.log(movements);
 console.log(firstWithdrawal);
 
 console.log(accounts);
-const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+const account = accounts.find((acc) => acc.owner === "Jessica Davis");
 console.log(account);
-
