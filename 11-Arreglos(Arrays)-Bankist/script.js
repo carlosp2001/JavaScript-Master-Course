@@ -166,7 +166,7 @@ btnTransfer.addEventListener("click", (e) => {
     (acc) => acc.username === inputTransferTo.value
   );
   // console.log(amount, receiverAccount);
-  inputTransferAmount.value = inputTransferTo.value = '';
+  inputTransferAmount.value = inputTransferTo.value = "";
   if (
     amount > 0 &&
     receiverAccount &&
@@ -181,6 +181,50 @@ btnTransfer.addEventListener("click", (e) => {
     // Update UI
     updateUI(currentAccount);
   }
+});
+
+btnLoan.addEventListener("click", (e) => {
+  e.preventDefault();
+  const amount = Number(inputLoanAmount.value);
+
+  // Verificamos si existe un depósito que tenga el valor del 10% solicitado del préstamo
+  if (
+    amount > 0 &&
+    currentAccount.movements.some((mov) => mov >= amount * 0.1)
+  ) {
+    // Agregar el movimiento
+    currentAccount.movements.push(amount);
+
+    // Update UI
+    updateUI(currentAccount);
+    inputLoanAmount.value = "";
+  }
+});
+
+///////////////////////////////////////////
+// El método findIndex
+
+btnClose.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  console.log("Delete");
+
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    const index = accounts.findIndex(
+      (acc) => acc.username === currentAccount.username
+    );
+    console.log(index);
+
+    // Eliminar cuenta
+    accounts.splice(index, 1);
+
+    // Hide UI
+    containerApp.style.opacity = 0;
+  }
+  inputCloseUsername.value = inputClosePin.value = "";
 });
 
 /////////////////////////////////////////////////
@@ -500,3 +544,29 @@ console.log(firstWithdrawal);
 console.log(accounts);
 const account = accounts.find((acc) => acc.owner === "Jessica Davis");
 console.log(account);
+
+////////////////////////////////////////////////
+// Métodos some y every
+// IGUALDAD
+console.log(movements);
+console.log(movements.includes(-130));
+
+// SOME: CONDICIÓN
+// En este caso equivaldria igual al includes
+console.log(movements.some((mov) => mov === -130));
+
+// El método some nos devuelve true si existe un valor igual en la matriz
+// Saber si ha habido depósitos en esa cuenta
+const anyDeposits = movements.some((mov) => mov > 0);
+console.log(anyDeposits);
+
+// EVERY
+// Nos devuelve true si todos los elementos de la matriz cumplen la condición
+console.log(movements.every((mov) => mov > 0));
+console.log(account4.movements.every((mov) => mov > 0));
+
+// Callback separado
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.every(deposit));
+console.log(movements.filter(deposit));
