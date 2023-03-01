@@ -566,7 +566,39 @@ console.log(movements.every((mov) => mov > 0));
 console.log(account4.movements.every((mov) => mov > 0));
 
 // Callback separado
-const deposit = mov => mov > 0;
+const deposit = (mov) => mov > 0;
 console.log(movements.some(deposit));
 console.log(movements.every(deposit));
 console.log(movements.filter(deposit));
+
+const arr3 = [[1, 2, 3], [4, 5, 6], 7, 8];
+
+// Elimina los arreglos anidados y crea un solo array
+console.log(arr3.flat());
+
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+// Se puede utilizar el argumento de profundidad, este nos ayuda a determinar hasta que nivel queremos que nuestro
+// método flat llegue
+console.log(arrDeep.flat(2));
+
+// Sacar todos los movimientos de todas las cuentas de un banco
+const accountMovements = accounts.map((acc) => acc.movements);
+console.log(accountMovements);
+
+const allMovements = accountMovements.flat();
+console.log(allMovements);
+
+// flat
+// const overallBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+const overallBalance = accounts
+  .map((acc) => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalance);
+
+// flatMap
+// flatMap solo puede ir a un nivel de profundidad, si necesitamos profundizar más necesitamos usar flat
+const overallBalanceF = accounts
+    .flatMap((acc) => acc.movements)
+    .reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalanceF);
