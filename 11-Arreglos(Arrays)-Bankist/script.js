@@ -61,12 +61,16 @@ const inputLoanAmount = document.querySelector(".form__input--loan-amount");
 const inputCloseUsername = document.querySelector(".form__input--user");
 const inputClosePin = document.querySelector(".form__input--pin");
 
-const displayMovements = (movements) => {
+const displayMovements = (movements, sort = false) => {
   // InnerHTML nos permite sobreescribir el codigo HTML y tambien nos devuelve el html completo del elemento que
   // seleccionamos
   containerMovements.innerHTML = "";
   // .textContent = 0
-  movements.forEach((mov, i) => {
+
+  // Aqui realizamos una copia del arreglo movimientos para no mutar el arreglo original
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach((mov, i) => {
     const type = mov > 0 ? "deposit" : "withdrawal";
     const html = `<div class="movements__row">
           <div class="movements__type movements__type--${type}">${
@@ -226,6 +230,13 @@ btnClose.addEventListener("click", (e) => {
   }
   inputCloseUsername.value = inputClosePin.value = "";
 });
+
+let sorted = false;
+btnSort.addEventListener('click', (e) => {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+})
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -599,6 +610,40 @@ console.log(overallBalance);
 // flatMap
 // flatMap solo puede ir a un nivel de profundidad, si necesitamos profundizar más necesitamos usar flat
 const overallBalanceF = accounts
-    .flatMap((acc) => acc.movements)
-    .reduce((acc, mov) => acc + mov, 0);
+  .flatMap((acc) => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
 console.log(overallBalanceF);
+
+///////////////////////////////////////////////////
+// Ordenar Arreglos / Sorting Arrays
+
+// Strings / Ordenar alfabéticamente
+const owners = ["Jonas", "Zach", "Adam", "Martha"];
+console.log(owners.sort());
+
+// Numeros
+console.log(movements);
+// console.log(movements.sort()); // De esta forma no los ordena por valor sino que toma en consideración el primer
+// número y lo convierte a cadena
+
+// return < 0, A, B (keep order)
+// return > 0, B, A (switch order)
+// Ordenar ascendente
+// movements.sort((a, b) => {
+//   // console.log(a, b);
+//   if (a > b) return 1;
+//   if (b > a) return -1;
+// });
+
+movements.sort((a, b) => a - b);
+console.log(movements);
+
+// Ordenar descendente
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (b > a) return 1;
+// });
+
+movements.sort((a, b) => b - a);
+
+console.log(movements);
