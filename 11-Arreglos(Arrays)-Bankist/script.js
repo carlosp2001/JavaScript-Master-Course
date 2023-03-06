@@ -678,16 +678,80 @@ const y = Array.from(
 );
 console.log(y);
 
-const z = Array.from({length: 7}, (_, i) => i + 1); // Nos devuelve desde el índice 0 hasta 6
+const z = Array.from({ length: 7 }, (_, i) => i + 1); // Nos devuelve desde el índice 0 hasta 6
 console.log(z);
 
-
-
-labelBalance.addEventListener('click', () => {
+labelBalance.addEventListener("click", () => {
   // Tomamos los elementos del dom y los convertimos a un array
-  const movementsUI = Array.from(document.querySelectorAll('.movements__value'),
-          el => Number(el.textContent.replace('€', '')));
+  const movementsUI = Array.from(
+    document.querySelectorAll(".movements__value"),
+    (el) => Number(el.textContent.replace("€", ""))
+  );
   console.log(movementsUI);
 
-  const movementsUI2 = [...document.querySelectorAll('.movements__value')]
-})
+  const movementsUI2 = [...document.querySelectorAll(".movements__value")];
+});
+
+/////////////////////////////////////////////////////
+// Práctica de métodos de un array
+
+// 1. Sumar todos los depositos de todas las cuentas utilizando el método flatMap
+const bankDepositSum = accounts
+  .flatMap((acc) => acc.movements)
+  .filter((mov) => mov > 0)
+  .reduce((sum, cur) => sum + cur, 0);
+console.log(bankDepositSum);
+
+// 2. Contar cuantos depósitos han habido en el banco con al menos $1,000
+// Usando length
+// const numDeposits1000 = accounts
+//   .flatMap((acc) => acc.movements)
+//   .filter((mov) => mov >= 1000).length;
+
+// Usando reduce
+const numDeposits1000 = accounts
+  .flatMap((acc) => acc.movements)
+  // .reduce((count, cur) => cur >= 1000 ? count + 1 : count, 0);
+  .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
+console.log(numDeposits1000);
+
+// Al usar el operador a++, el nos devolvera el valor anterior, hasta despues de la declaración obtendra el valor sumado
+
+let a = 10;
+console.log(a++);
+console.log(a);
+
+// La solución facil para esto es el prefijo plus plus
+console.log(++a);
+
+// 3. Crear un nuevo objeto en lugar de solo un numero o solo una cadena.
+const { depositsR, withdrawalsR } = accounts
+  .flatMap((acc) => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      // cur > 0 ? (sums.depositsR += cur) : (sums.withdrawalsR += cur);
+      sums[cur > 0 ? "depositsR" : "withdrawalsR"] += cur;
+      return sums;
+    },
+    { depositsR: 0, withdrawalsR: 0 }
+  );
+
+console.log(depositsR, withdrawalsR);
+
+// 4. Crear una simple función para convertir cualquier cadena en un caso de título
+// Ejemplo this is a nice -> This Is a Nice Title
+const convertTitleCase = (title) => {
+  const capitalize = (str) => str[0].toUpperCase() + str.slice(1);
+  const exceptions = ["a", "an", "and", "the", "but", "or", "on", "in", "with"];
+
+  return capitalize(
+    title
+      .toLowerCase()
+      .split(" ")
+      .map((word) => (exceptions.includes(word) ? word : capitalize(word)))
+      .join(" ")
+  );
+};
+console.log(convertTitleCase("this is a nice title"));
+console.log(convertTitleCase("this is a LONG title but not too long"));
+console.log(convertTitleCase("and here is another title with an EXAMPLE"));
