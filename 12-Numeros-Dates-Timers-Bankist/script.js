@@ -316,12 +316,13 @@ console.log(Math.max(5, 18, "23px", 11, 2));
 console.log(Math.min(5, 18, 23, 11, 2));
 
 // Uso del PI
-console.log(Math.PI * Number.parseFloat('10px') ** 2);
+console.log(Math.PI * Number.parseFloat("10px") ** 2);
 
 // Generar números aleatorios
 console.log(Math.trunc(Math.random() * 6) + 1);
 // Número aleatorio que se mantendrá entre un rango
-const randomInt = (min, max) => Math.floor(Math.random() * (max - min) + 1) + min;
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min) + 1) + min;
 // 0...1 -> 0...(max-min) -> min...max
 console.log(randomInt(10, 20));
 
@@ -335,13 +336,44 @@ console.log(Math.ceil(23.6)); // Siempre redondearán al numero mayor
 console.log(Math.ceil(23.9));
 
 console.log(Math.floor(23.3)); // Redondea al numero menor
-console.log(Math.floor('23.9')); // Redondea al numero menor
+console.log(Math.floor("23.9")); // Redondea al numero menor
 
 // Diferencia entre trunc y floor
 console.log(Math.trunc(-23.3)); // Este simplemente elimina la parte decimal -23
 console.log(Math.floor(-23.3)); // Este redondea al numero menor seria -24
 
 // Redondeo de decimales
-console.log((2.7).toFixed(0))
-console.log((2.7).toFixed(3))
-console.log(+(2.345).toFixed(2))
+console.log((2.7).toFixed(0));
+console.log((2.7).toFixed(3));
+console.log(+(2.345).toFixed(2));
+
+////////////////////////////////////////////
+// El operador restante
+
+console.log(5 % 2);
+console.log(5 / 2); // 5 = 2 * 2 + 1
+
+console.log(8 % 3);
+console.log(8 / 3); // 8 = 2 * 3 + 2
+
+// Even numbers : Números pares / Odd Numbers : Números impares
+console.log(6 % 2); // Even number
+console.log(6 / 2);
+
+console.log(7 % 2);
+console.log(7 / 2);
+
+const isEven = (n) => n % 2 === 0;
+console.log(isEven(8));
+console.log(isEven(23));
+console.log(isEven(514));
+
+labelBalance.addEventListener("click", () => {
+  [...document.querySelectorAll(".movements__row")].forEach((row, i) => {
+    // 0, 2, 4, 6
+    if (i % 2 === 0) row.style.backgroundColor = "orangered";
+    // 0, 3, 6, 9
+    if (i % 3 === 0) row.style.backgroundColor = "blue";
+  });
+});
+// Nth
