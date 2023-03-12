@@ -386,7 +386,7 @@ const diameter = 287_460_000_000;
 console.log(diameter);
 
 const price = 345_99;
-console.log(price)
+console.log(price);
 
 const transferFee1 = 15_00;
 const transferFee2 = 1_500;
@@ -394,8 +394,8 @@ const transferFee2 = 1_500;
 const PI = 3.14_15;
 console.log(PI);
 
-console.log(Number('230_000'));
-console.log(parseInt('230_000')); // 230
+console.log(Number("230_000"));
+console.log(parseInt("230_000")); // 230
 
 //////////////////////////////////////////////
 // Trabajando con BigInt
@@ -406,7 +406,7 @@ BigInt es un tipo especial de números enteros que se introdujo en el año 2020
 
 // Máximo numero que JS puede representar
 console.log(2 ** 53 - 1);
-console.log(Number.MAX_SAFE_INTEGER)
+console.log(Number.MAX_SAFE_INTEGER);
 console.log(2 ** 53 + 1);
 console.log(2 ** 53 + 2);
 console.log(2 ** 53 + 3);
@@ -417,7 +417,7 @@ console.log(BigInt(4823823184828248842399043092304));
 
 // Operaciones con BigInt
 console.log(10000n + 10000n);
-console.log(1234123423421342344132134234n*10000000000n);
+console.log(1234123423421342344132134234n * 10000000000n);
 // console.log(Math.sqrt(16n)); // No funciona con metodos Math
 
 const huge = 200239320204924092390420943n;
@@ -430,9 +430,54 @@ console.log(20n === 20); // Nos devuelve falso por la coerción de tipos
 console.log(typeof 20n);
 console.log(20n == 20); // Nos devuelve verdadero
 
-console.log(huge + 'is really BIG!!!');
+console.log(huge + "is really BIG!!!");
 
 // Divisiones
 console.log(11n / 3n);
-console.log(10 /3);
+console.log(10 / 3);
+
+///////////////////////////////////////////////
+// Creando dates / fechas
+
+// Crear una fecha
+const now = new Date();
+console.log(now);
+
+console.log(new Date("Mar 12 2023 13:35:04"));
+console.log(new Date("December 24, 2015"));
+console.log(new Date(account1.movementsDates[0]));
+
+// Los meses en JS tienen base 0 10 = Noviembre
+console.log(new Date(2037, 10, 19, 15, 23, 5));
+
+// JS también corrige el dia si es superior a los dias que tiene ese mes
+console.log(new Date(2037, 10, 33));
+
+console.log(new Date(0));
+console.log(new Date(3 * 24 * 60 * 60 * 1000));
+
+// Usando dates
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future);
+
+console.log(future.getFullYear()); // Obtener el año de una fecha
+console.log(future.getMonth()); // Obtenemos el mes pero recordar que es en base 0 por lo que habría que agregarle 1
+// para conocer el mes real
+console.log(future.getDate());
+console.log(future.getDay()); // Nos devuelve el dia lo cual hace referencia a 4 = Jueves
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+console.log(future.toISOString());
+console.log(future.getTime()); // Obtiene la marca de tiempo / timestamp
+console.log(new Date(2142278580000)); // Revierte la marca de tiempo y la convierte en fecha
+
+console.log(Date.now());
+
+future.setFullYear(2040); // Cambiar el año a una fecha
+
+
+
+
+
 
