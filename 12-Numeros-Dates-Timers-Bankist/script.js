@@ -396,3 +396,43 @@ console.log(PI);
 
 console.log(Number('230_000'));
 console.log(parseInt('230_000')); // 230
+
+//////////////////////////////////////////////
+// Trabajando con BigInt
+
+/*
+BigInt es un tipo especial de números enteros que se introdujo en el año 2020
+ */
+
+// Máximo numero que JS puede representar
+console.log(2 ** 53 - 1);
+console.log(Number.MAX_SAFE_INTEGER)
+console.log(2 ** 53 + 1);
+console.log(2 ** 53 + 2);
+console.log(2 ** 53 + 3);
+console.log(2 ** 53 + 4);
+
+console.log(4823823184828248842399043092304n);
+console.log(BigInt(4823823184828248842399043092304));
+
+// Operaciones con BigInt
+console.log(10000n + 10000n);
+console.log(1234123423421342344132134234n*10000000000n);
+// console.log(Math.sqrt(16n)); // No funciona con metodos Math
+
+const huge = 200239320204924092390420943n;
+const num = 23;
+console.log(huge * BigInt(num)); // No podemos hacer cálculos cuando son diferentes tipos de números
+
+// Excepcion: Los operadores logicos si permiten comparación
+console.log(20n > 15);
+console.log(20n === 20); // Nos devuelve falso por la coerción de tipos
+console.log(typeof 20n);
+console.log(20n == 20); // Nos devuelve verdadero
+
+console.log(huge + 'is really BIG!!!');
+
+// Divisiones
+console.log(11n / 3n);
+console.log(10 /3);
+
