@@ -97,8 +97,64 @@ document.querySelector('.btn--close-cookie').addEventListener('click', () => {
 
   // Eliminar el elemento padre
   message.parentElement.removeChild(message);
-
-
-
 });
 
+/////////////////////////////////////////////////////////////////
+// Estilos (Styles), Atributos (Attributes) y Clases (Classes)
+
+// Estilos / Styles
+
+message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
+
+console.log(message.style.height); // El método style solo funciona para los estilos que están configurados in-line, si
+// están definidos por una clase no funcionaran
+console.log(message.style.backgroundColor);
+
+// getComputedStyle esto nos ayuda a obtener el valor del estilo aunque este se encuentre en una clase
+console.log(getComputedStyle(message).color);
+console.log(getComputedStyle(message).height);
+
+// Agregar valor a una propiedad
+message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
+
+// Cambiar el valor de una variable de css
+// document.documentElement.style.setProperty('--color-primary', 'orangered');
+
+// Atributos / Attributes
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.src);
+console.log(logo.className); // Nos devulve las clases
+
+// Definir atributos
+logo.alt = 'Beautiful minimalist logo';
+
+// Atributos no estandar
+console.log(logo.designer); // Solo acepta atributos estandar
+console.log(logo.getAttribute('designer'));
+
+// Agregar atributos
+logo.setAttribute('company', 'Bankist')
+
+// Diferentes maneras de obtener un atributo
+// Funciona de igual manera para los atributos href
+console.log(logo.src); // Nos devuelve la ubicación absoluta
+console.log(logo.getAttribute('src')); // Nos devueve la ubicacion relativa
+
+const link = document.querySelector('.nav__link--btn');
+console.log(link.href);
+console.log(link.getAttribute('href'));
+
+// Atributos de datos / Data Attributes
+// Este tipo de atributos comienzan con la palabra data y se almacenan en dataset
+console.log(logo.dataset.versionNumber);
+
+// Propiedades de clases / Classes properties
+logo.classList.add('c', 'j');
+logo.classList.remove('c', 'j');
+logo.classList.toggle('c');
+logo.classList.contains('c'); // A diferencia que en un array se llama contains not includes
+
+// No usar porque sobreescribe todas las demás clases
+logo.className = 'jonas';
