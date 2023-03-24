@@ -191,3 +191,25 @@ btnScrollTo.addEventListener('click', function (e) {
   // Manera mas moderna de hacer scrolling, solo funciona en navaegadores modernos
   section1.scrollIntoView({behavior: 'smooth'});
 });
+
+////////////////////////////////////////////////////////////
+// Tipos de eventos y manejo de eventos (event handlers)
+
+const h1 = document.querySelector('h1');
+
+const alertH1 = function (e) {
+  alert("addEventlistener: Great you're greating the header :D");
+
+  // Con el metodo removeEventListener eliminamos el llamado y la siguiente vez ya no sucede
+  // h1.removeEventListener('mouseenter', alertH1);
+}
+
+h1.addEventListener('mouseenter', alertH1);
+
+// Eliminar un event listener con un timeOut
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+
+// h1.onmouseenter = function (e) {
+//   alert("addEventlistener: Great you're greating the header :D");
+// }
+
