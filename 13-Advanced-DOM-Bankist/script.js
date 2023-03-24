@@ -33,6 +33,7 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+/*
 ///////////////////////////////////////////////////////
 // Seleccionando, creando y eliminando elementos
 
@@ -158,3 +159,35 @@ logo.classList.contains('c'); // A diferencia que en un array se llama contains 
 
 // No usar porque sobreescribe todas las demás clases
 logo.className = 'jonas';
+*/
+
+// Implementando desplazamiento suave / smooth scrolling
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+  console.log('Current scroll (X/Y)', window.pageXOffset, pageYOffset);
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  // Scrolling
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset
+  // );
+
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth' // Esta propiedad le da el efecto al scrolling
+  // });
+
+  // Manera mas moderna de hacer scrolling, solo funciona en navaegadores modernos
+  section1.scrollIntoView({behavior: 'smooth'});
+});
