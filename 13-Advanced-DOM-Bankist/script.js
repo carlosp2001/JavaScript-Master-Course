@@ -1,12 +1,14 @@
 'use strict';
 
-///////////////////////////////////////
-// Modal window
-
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+///////////////////////////////////////
+// Modal window
 
 const openModal = function (e) {
   e.preventDefault();
@@ -32,6 +34,64 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+// Boton de scrolling
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+  console.log('Current scroll (X/Y)', window.pageXOffset, pageYOffset);
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  // Scrolling
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset
+  // );
+
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth' // Esta propiedad le da el efecto al scrolling
+  // });
+
+  // Manera mas moderna de hacer scrolling, solo funciona en navaegadores modernos
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+///////////////////////////////////////////////////////
+// Navegacion de página
+
+// Forma de hacerlo sin delegación de eventos
+// document.querySelectorAll('.nav__link').forEach(el =>
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     const id = this.getAttribute('href');
+//     document.querySelector(id).scrollIntoView({behavior: 'smooth'})
+//     // console.log(id);
+//   })
+// );
+
+// Usando la delegación de eventos: esta tecnica nos ayuda a saber de donde vino el elemento click y hace mas eficiente
+// nuestro codigo ya que a diferencia no tenemos que repetir el event handler a todos los elementos
+// 1. Agregar un event listener a un elemento padre comun
+// 2. Determinar que elemento originó el evento
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  console.log(e.target);
+  e.preventDefault();
+
+  // Estrategia de comparación
+  if (e.target.classList.contains('nav__link')) {
+    console.log('LINK');
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({behavior: 'smooth'})
+    // console.log(id);
+  }
+})
 
 /*
 ///////////////////////////////////////////////////////
@@ -161,6 +221,7 @@ logo.classList.contains('c'); // A diferencia que en un array se llama contains 
 logo.className = 'jonas';
 */
 
+/*
 // Implementando desplazamiento suave / smooth scrolling
 
 const btnScrollTo = document.querySelector('.btn--scroll-to');
@@ -171,9 +232,9 @@ btnScrollTo.addEventListener('click', function (e) {
   console.log(s1coords);
   console.log('Current scroll (X/Y)', window.pageXOffset, pageYOffset);
   console.log(
-    'height/width viewport',
-    document.documentElement.clientHeight,
-    document.documentElement.clientWidth
+      'height/width viewport',
+      document.documentElement.clientHeight,
+      document.documentElement.clientWidth
   );
 
   // Scrolling
@@ -191,6 +252,7 @@ btnScrollTo.addEventListener('click', function (e) {
   // Manera mas moderna de hacer scrolling, solo funciona en navaegadores modernos
   section1.scrollIntoView({ behavior: 'smooth' });
 });
+*/
 
 /*
 ////////////////////////////////////////////////////////////
@@ -215,9 +277,7 @@ setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 // }
  */
 
-
-
-
+/*
 ////////////////////////////////////////////////////////
 // Propagación de evento: Bubbling y Captura
 
@@ -255,4 +315,8 @@ document.querySelector('.nav').addEventListener('click', function (e) {
   this.style.backgroundColor = randomColor();
   console.log('NAV', e.target, e.currentTarget);
 }, true); // Si colocamos el parametro true activamos que escuche la fase de captura, es decir que ahora este
-// sera el primer metodo realizado
+// será el primer método realizado
+*/
+
+/////////////////////////////////////////////////////////////////
+// Delegacion de Evento: Implementando navegacion de la pagina
