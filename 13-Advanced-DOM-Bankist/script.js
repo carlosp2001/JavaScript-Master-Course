@@ -189,9 +189,10 @@ btnScrollTo.addEventListener('click', function (e) {
   // });
 
   // Manera mas moderna de hacer scrolling, solo funciona en navaegadores modernos
-  section1.scrollIntoView({behavior: 'smooth'});
+  section1.scrollIntoView({ behavior: 'smooth' });
 });
 
+/*
 ////////////////////////////////////////////////////////////
 // Tipos de eventos y manejo de eventos (event handlers)
 
@@ -212,4 +213,46 @@ setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 // h1.onmouseenter = function (e) {
 //   alert("addEventlistener: Great you're greating the header :D");
 // }
+ */
 
+
+
+
+////////////////////////////////////////////////////////
+// Propagación de evento: Bubbling y Captura
+
+///////////////////////////////////////////////////////
+// Propagación de eventos en práctica
+
+// rgb(255, 255, 255) color aleatorio
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+console.log(randomColor(0, 255));
+
+// Al ver el objetivo donde se origina el evento los tres elementos tienen el mismo punto de origen
+// currentTarget hace referencia al elemento en donde se adjunta el controlador de eventos, por lo tanto currentTarget
+// y this son lo mismo
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  // Recordar que la función flecha no tiene elemento this
+  this.style.backgroundColor = randomColor();
+  console.log('LINK', e.target, e.currentTarget);
+  console.log(e.currentTarget === this);
+
+  // stopPropagation: Esto nos ayuda a que simplemente se ejecute ese eventHandler y no se propague en los demas
+  // elementos
+  // e.stopPropagation();
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('CONTAINER', e.target, e.currentTarget);
+});
+
+document.querySelector('.nav').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('NAV', e.target, e.currentTarget);
+}, true); // Si colocamos el parametro true activamos que escuche la fase de captura, es decir que ahora este
+// sera el primer metodo realizado
