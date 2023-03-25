@@ -139,6 +139,9 @@ nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1));
 
 // Navegacion sticky
+
+// Usando scroll
+/*
 const initialCoords = section1.getBoundingClientRect();
 console.log(initialCoords);
 
@@ -146,7 +149,26 @@ window.addEventListener('scroll', function (e) {
   console.log(window.scrollY);
   if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
   else nav.classList.remove('sticky');
-})
+})*/
+
+const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
+
+const stickyNav = (entries) => {
+  const [entry] = entries;
+  console.log(entry);
+  entry.isIntersecting ? nav.classList.remove('sticky') : nav.classList.add('sticky');
+}
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px` // Nos ayuda a especificar que margen queremos tener para que detecte la funcion
+});
+headerObserver.observe(header);
+
+
+
 
 /*
 ///////////////////////////////////////////////////////
@@ -415,4 +437,24 @@ console.log(h1.parentElement.children); // Metodo para recuperar todos los eleme
 ////////////////////////////////////////////////////////
 // Implementando una navegación sticky: El evento scroll
 
+////////////////////////////////////////////////////////
+// Mejor manera: API de observador de intersecciones
 
+// Esta API permite que nuestro codigo basicamente observe cambios en la forma en que un determinado elemento de
+// destino se cruza con otro elemento, o la forma en que se cruza con la ventana gráfica
+
+const obsCallback = function (entries, observer) {
+  entries.forEach(entry => {
+    console.log(entry);
+  })
+};
+
+const obsOptions = {
+  root: null,
+  threshold: [0, 0.2] // Es el porcentaje de intersección en el que se llamara a la devolucion de llamada del
+  // observador, 0 significa que se activara cada vez que el elemento este completamente fuera de la vista, 1 significa
+  // que el elemento estará al 100% en la pantalla, en este caso no pasaria con la seccion 1
+}
+
+const observer = new IntersectionObserver(obsCallback, obsOptions);
+observer.observe(section1);
