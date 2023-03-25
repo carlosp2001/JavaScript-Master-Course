@@ -88,10 +88,38 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   if (e.target.classList.contains('nav__link')) {
     console.log('LINK');
     const id = e.target.getAttribute('href');
-    document.querySelector(id).scrollIntoView({behavior: 'smooth'})
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
     // console.log(id);
   }
-})
+});
+
+// Componente con pestañas
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+// Usando delegacion de eventos
+tabsContainer.addEventListener('click', e => {
+  const clicked = e.target.closest('.operations__tab');
+  // console.log(clicked);
+  // Guard clause
+  if (!clicked) return;
+
+  // Pestaña activa
+  // Remover clases activas
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+
+  // Activar pestaña
+  clicked.classList.add('operations__tab--active');
+
+  // Activar area de contenido
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+
+
+});
 
 /*
 ///////////////////////////////////////////////////////
@@ -321,7 +349,7 @@ document.querySelector('.nav').addEventListener('click', function (e) {
 /////////////////////////////////////////////////////////////////
 // Delegacion de Evento: Implementando navegacion de la pagina
 
-
+/*
 /////////////////////////////////////////////////////////////////
 // Atravesar el DOM (DOM Traversing)
 
@@ -352,3 +380,7 @@ console.log(h1.parentElement.children); // Metodo para recuperar todos los eleme
 [...h1.parentElement.children].forEach(function (el) {
   if (el !== h1) el.style.transform = 'scale(0.5)';
 })
+ */
+
+////////////////////////////////////////////////////////
+// Construyendo un componente con pestañas
