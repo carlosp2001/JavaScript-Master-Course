@@ -187,7 +187,7 @@ const sectionObserver = new IntersectionObserver(revealSection, {
 
 allSections.forEach(function (section) {
   sectionObserver.observe(section);
-  // section.classList.add('section--hidden');
+  section.classList.add('section--hidden');
 });
 
 // Lazy loading images
@@ -597,3 +597,27 @@ const obsOptions = {
 const observer = new IntersectionObserver(obsCallback, obsOptions);
 observer.observe(section1);
 */
+
+////////////////////////////////////////////////////////////////////
+// Eventos del ciclo de vida del DOM
+
+// DOM Content Loaded
+document.addEventListener('DOMContentLoaded', function (e) {
+  console.log('HTML Parsed and DOM Tree built: ', e);
+})
+
+// DOM Load Event
+// Este evento se ejecuta una vez todo el html y js es cargado pero tambien todos los recursos externos como ser css
+// e imagenes externas
+
+window.addEventListener('load', function (e) {
+  console.log('Page fully loaded', e);
+});
+
+// BeforeUnload Event: Este evento es ejecutado inmediatamente que un usuario este a punto de abandonar una pagina.
+// Entonces por ejemplo despues de hacer clic en este boton de cierre
+window.addEventListener('beforeunload', function (e) {
+  e.preventDefault();
+  console.log(e);
+  e.returnValue = ''
+})
