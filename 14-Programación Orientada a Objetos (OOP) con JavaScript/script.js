@@ -52,13 +52,13 @@ console.log(jonas.__proto__ === Person.prototype);
 console.log(Person.prototype.isPrototypeOf(jonas));
 console.log(Person.prototype.isPrototypeOf(matilda));
 
-Person.prototype.species = 'Homo Sapiens';
+Person.prototype.species = "Homo Sapiens";
 console.log(jonas, matilda);
 console.log(jonas.species, matilda.species);
 
-console.log(jonas.hasOwnProperty('firstName'));
-console.log(jonas.hasOwnProperty('species'));
-console.log(jonas.hasOwnProperty('name'));
+console.log(jonas.hasOwnProperty("firstName"));
+console.log(jonas.hasOwnProperty("species"));
+console.log(jonas.hasOwnProperty("name"));
 
 ////////////////////////////////////////////////////
 // Herencia prototipica en objetos integrados
@@ -81,9 +81,9 @@ Array.prototype.unique = function () {
 
 console.log(arr.unique());
 
-const  h1 = document.querySelector('h1');
+const h1 = document.querySelector("h1");
 console.dir(h1);
-console.dir(x => x + 1);
+console.dir((x) => x + 1);
 
 ///////////////////////////////////////
 // Coding Challenge #1
@@ -107,18 +107,97 @@ const Car = function (make, speed) {
 
 Car.prototype.accelerate = function () {
   this.speed += 10;
-  console.log(`${this.make} is going at ${this.speed} km/h`)
-}
+  console.log(`${this.make} is going at ${this.speed} km/h`);
+};
 
 Car.prototype.brake = function () {
   this.speed -= 5;
-  console.log(`${this.make} is going at ${this.speed} km/h`)
-}
+  console.log(`${this.make} is going at ${this.speed} km/h`);
+};
 
-const bmw = new Car('BMW', 120);
-const mercedes = new Car('Mercedes', 95);
+const bmw = new Car("BMW", 120);
+const mercedes = new Car("Mercedes", 95);
 
 bmw.accelerate();
 bmw.accelerate();
 bmw.brake();
 bmw.accelerate();
+
+/////////////////////////////////////////////////
+// ES6 Clases
+
+// class expression
+// const PersonClE = class {};
+
+// class declaration
+class PersonCl {
+  constructor(fullName, birthYear) {
+    // Propiedades
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  // Métodos se agregarán a la propiedad .prototype
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.firstName}`);
+  }
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+
+  // Set a property that already exists
+  set fullName(name) {
+    console.log(name)
+    if (name.includes(' '))  this._fullName = name
+    else alert(`${name} is not a full name!`)
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+}
+
+const jessica = new PersonCl("Jessica Davis", 1996);
+console.log(jessica);
+console.log(jessica.fullName);
+jessica.calcAge();
+console.log(jessica.age);
+
+console.log(jessica.__proto__ === PersonCl.prototype);
+
+// PersonCl.prototype.greet = function () {
+//   console.log(`Hey ${this.firstName}`);
+// };
+
+jessica.greet();
+
+// 1. Classes are not hoisted (No podemos usarlas antes de declararlas en el codigo
+// 2. Classes are first-class citizens (Podemos pasarlos a funciones y tambien devolverlos de funciones)
+// 3. Classes are executed in strict mode
+
+///////////////////////////////////////////////////////////
+// Setters y getters
+
+const walter = new PersonCl('Walter White', 1965)
+
+const account = {
+  owner: "Jonas",
+  movements: [200, 530, 120, 300],
+
+  get latest() {
+    return this.movements.slice(-1).pop();
+  },
+  set latest(mov) {
+    this.movements.push(mov);
+  },
+};
+
+console.log(account.latest);
+
+account.latest = 50;
+console.log(account.movements);
