@@ -137,6 +137,7 @@ class PersonCl {
     this.birthYear = birthYear;
   }
 
+  // Metodos de instancia
   // Métodos se agregarán a la propiedad .prototype
   calcAge() {
     console.log(2037 - this.birthYear);
@@ -159,6 +160,12 @@ class PersonCl {
 
   get fullName() {
     return this._fullName;
+  }
+
+  // Static method
+  static hey() {
+    console.log('Hey there');
+    console.log(this);
   }
 }
 
@@ -184,6 +191,7 @@ jessica.greet();
 // Setters y getters
 
 const walter = new PersonCl('Walter White', 1965)
+PersonCl.hey();
 
 const account = {
   owner: "Jonas",
@@ -195,9 +203,35 @@ const account = {
   set latest(mov) {
     this.movements.push(mov);
   },
+
 };
 
 console.log(account.latest);
 
 account.latest = 50;
 console.log(account.movements);
+
+////////////////////////////////////////////////////////////
+// Métodos Estáticos
+
+// Los metodos estáticos estan definidos en el constructor por lo que no estan disponibles en el prototipo y sus
+// herencias
+
+const Person1 = function (firstName, birthYear) {
+  // Propiedades de la instancia
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+
+  // Never create a method inside constructor function
+  // this.calcAge = function () {
+  // 	console.log(2037 - this.birthYear);
+  // };
+  console.log(this);
+};
+
+// No hay forma de que este método sea heredado, simplemente esta en el constructor
+Person1.hey = function () {
+  console.log('Hey there');
+};
+
+Person1.hey();
