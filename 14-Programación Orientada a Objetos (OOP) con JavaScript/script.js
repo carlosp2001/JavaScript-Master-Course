@@ -306,3 +306,44 @@ ford.accelerate();
 ford.brake();
 ford.speedUS = 50;
 console.log(ford);
+
+///////////////////////////////////////////////////////
+// Herencia entre clases: funciones constructoras
+
+const PersonH = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+
+PersonH.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear)
+};
+
+const Student = function (firstName, birthYear, course) {
+  PersonH.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+// Vinculando prototipos
+Student.prototype = Object.create(PersonH.prototype);
+
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+}
+
+const mike = new Student('Mike', 2020, 'Computer Science');
+console.log(mike);
+mike.introduce();
+mike.calcAge();
+
+console.log(mike.__proto__);
+console.log(mike.__proto__.__proto__);
+
+console.log(mike instanceof Student);
+console.log(mike instanceof Person);
+console.log(mike instanceof Object);
+
+Student.prototype.constructor = Student;
+console.dir(Student.prototype.constructor); // De esta forma JS piensa que el constructor de student es Person
+// esto es porque establecemos la propiedad del prototipo del estudiante usando el object.create
+
