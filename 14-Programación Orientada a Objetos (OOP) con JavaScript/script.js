@@ -500,3 +500,50 @@ const jay1 = Object.create(StudentProto1);
 jay1.init('Jay', 2010, 'Computer Science');
 jay1.introduce();
 jay1.calcAge();
+
+////////////////////////////////////////////////////////////
+// Otro ejemplo de clase
+
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currrency = currency;
+    this.pin = pin;
+    this.movements = [];
+    this.locale = navigator.language;
+    console.log(`Thanks for openning an account, ${owner}`);
+  }
+
+  // Public interface of our objects
+  deposit(val) {
+    this.movements.push(val)
+  }
+
+  withdraw(val) {
+    this.deposit(-val)
+  }
+
+  approveLoan(val) {
+    return true;
+  }
+
+  requestLoan(val) {
+    if (this.approveLoan(val)) {
+      this.deposit(val);
+      console.log(`Loan approved`);
+    }
+  }
+}
+
+const acc1 = new Account('Jonas', 'EUR', 1111, []);
+
+// acc1.movements.push(250);
+// acc1.movements.push(-140);
+acc1.deposit(250);
+acc1.withdraw(140);
+acc1.requestLoan(1000);
+acc1.approveLoan(1000);
+
+console.log(acc1);
+console.log(acc1.pin);
+
