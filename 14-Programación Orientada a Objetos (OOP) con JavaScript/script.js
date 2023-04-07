@@ -471,3 +471,32 @@ class StudentC extends PersonC {
 const martha = new StudentC("Martha Jones", 2012, "Computer Science");
 martha.introduce();
 martha.calcAge();
+
+///////////////////////////////////////////////////////
+// Herencia entre clases: Object.create
+
+const PersonProto1 = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+};
+
+const stevenC = Object.create(PersonProto1);
+
+const StudentProto1 = Object.create(PersonProto1);
+StudentProto1.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+}
+StudentProto1.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`)
+}
+
+const jay1 = Object.create(StudentProto1);
+jay1.init('Jay', 2010, 'Computer Science');
+jay1.introduce();
+jay1.calcAge();
