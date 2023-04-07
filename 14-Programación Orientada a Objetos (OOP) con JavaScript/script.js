@@ -556,3 +556,80 @@ console.log(acc1._pin);
 ///////////////////////////////////////////////////////////
 // Encapsulación: Propiedades protegidas y métodos
 
+///////////////////////////////////////////////////////////
+// Encapsulación: Campos de clases privadas y métodos
+
+// 1) Public fields
+// 2) Private fields
+// 3) Public methods
+// 4) Private methods
+// Podemos pensar en un campo como una propiedad que estará en todas las instancias, por eso también podemos llamar a
+// esto un campo de instancia pública.
+// (there is also the static version)
+
+class AccountE {
+  // 1) Public field (campos estan en las intancias)
+  locale = navigator.language;
+
+  // 2) Private fields (instances)
+  #movements = [];
+  #pin;
+
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currrency = currency;
+    // protected property
+    this.#pin = pin;
+    // this._movements = [];
+    // this.locale = navigator.language;
+    console.log(`Thanks for openning an account, ${owner}`);
+  }
+
+  // 3) Public methods
+
+  // Public interface of our objects
+  getMovements() {
+    return this.#movements;
+  }
+
+  deposit(val) {
+    this.#movements.push(val)
+  }
+
+  withdraw(val) {
+    this.deposit(-val)
+  }
+
+  _approveLoan(val) {
+    return true;
+  }
+
+  requestLoan(val) {
+    if (this._approveLoan(val)) {
+      this.deposit(val);
+      console.log(`Loan approved`);
+    }
+  }
+
+  static helper() {
+    console.log('Helper');
+  }
+
+  // 4) Private methods
+  // #approveLoan(val) {
+  //   return true;
+  // }
+}
+
+const acc2 = new AccountE('Jonas', 'EUR', 1111, []);
+
+acc2.deposit(250);
+acc2.withdraw(140);
+acc2.requestLoan(1000);
+acc2._approveLoan(1000);
+console.log(acc2);
+// console.log(acc2.#movements);
+console.log(acc2.getMovements());
+// console.log(acc2.#pin)
+
+AccountE.helper();
