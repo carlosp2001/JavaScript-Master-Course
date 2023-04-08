@@ -482,7 +482,7 @@ const PersonProto1 = {
   init(firstName, birthYear) {
     this.firstName = firstName;
     this.birthYear = birthYear;
-  }
+  },
 };
 
 const stevenC = Object.create(PersonProto1);
@@ -491,13 +491,13 @@ const StudentProto1 = Object.create(PersonProto1);
 StudentProto1.init = function (firstName, birthYear, course) {
   PersonProto.init.call(this, firstName, birthYear);
   this.course = course;
-}
+};
 StudentProto1.introduce = function () {
-  console.log(`My name is ${this.firstName} and I study ${this.course}`)
-}
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
 
 const jay1 = Object.create(StudentProto1);
-jay1.init('Jay', 2010, 'Computer Science');
+jay1.init("Jay", 2010, "Computer Science");
 jay1.introduce();
 jay1.calcAge();
 
@@ -521,11 +521,11 @@ class Account {
   }
 
   deposit(val) {
-    this._movements.push(val)
+    this._movements.push(val);
   }
 
   withdraw(val) {
-    this.deposit(-val)
+    this.deposit(-val);
   }
 
   _approveLoan(val) {
@@ -540,7 +540,7 @@ class Account {
   }
 }
 
-const acc1 = new Account('Jonas', 'EUR', 1111, []);
+const acc1 = new Account("Jonas", "EUR", 1111, []);
 
 acc1._movements.push(250);
 acc1._movements.push(-140);
@@ -548,7 +548,7 @@ acc1.deposit(250);
 acc1.withdraw(140);
 acc1.requestLoan(1000);
 acc1._approveLoan(1000);
-console.log(acc1.getMovements())
+console.log(acc1.getMovements());
 
 console.log(acc1);
 console.log(acc1._pin);
@@ -598,7 +598,7 @@ class AccountE {
   }
 
   withdraw(val) {
-    this.deposit(-val)
+    this.deposit(-val);
     return this;
   }
 
@@ -615,7 +615,7 @@ class AccountE {
   }
 
   static helper() {
-    console.log('Helper');
+    console.log("Helper");
   }
 
   // 4) Private methods
@@ -624,7 +624,7 @@ class AccountE {
   // }
 }
 
-const acc2 = new AccountE('Jonas', 'EUR', 1111, []);
+const acc2 = new AccountE("Jonas", "EUR", 1111, []);
 
 acc2.deposit(250);
 acc2.withdraw(140);
@@ -642,3 +642,79 @@ AccountE.helper();
 
 acc2.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
 console.log(acc2.getMovements());
+
+///////////////////////////////////////
+// Coding Challenge #4
+
+/*
+1. Re-create challenge #3, but this time using ES6 classes: create an 'EVCl' child class of the 'CarCl' class
+2. Make the 'charge' property private;
+3. Implement the ability to chain the 'accelerate' and 'chargeBattery' methods of this class, and also update the 'brake' method in the 'CarCl' class. They experiment with chining!
+
+DATA CAR 1: 'Rivian' going at 120 km/h, with a charge of 23%
+
+GOOD LUCK 😀
+*/
+
+class CarClE {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.make} is going at ${this.speed} km/h`);
+  }
+
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.make} is going at ${this.speed} km/h`);
+    return this;
+  }
+
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
+  }
+}
+
+class EVCl extends CarClE {
+  #charge;
+
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
+
+  chargeBattey(chargeTo) {
+    this.#charge = chargeTo;
+    return this;
+  }
+
+  accelerate() {
+    this.speed += 20;
+    this.#charge--;
+    console.log(
+      `${this.make} is going at ${this.speed} km/h, with a charge of ${
+        this.#charge
+      }`
+    );
+    return this;
+  }
+}
+
+const rivian = new EVCl("Rivian", 120, 23);
+console.log(rivian);
+rivian
+  .accelerate()
+  .accelerate()
+  .accelerate()
+  .brake()
+  .chargeBattey(50)
+  .accelerate();
+
+console.log(rivian.speedUS);
