@@ -18,7 +18,7 @@ if (navigator.geolocation) {
     function (position) {
       const {latitude} = position.coords;
       const {longitude} = position.coords;
-      console.log(latitud, longitude)
+      console.log(latitude, longitude)
     },
     function () {
       alert('Could not get the position');
