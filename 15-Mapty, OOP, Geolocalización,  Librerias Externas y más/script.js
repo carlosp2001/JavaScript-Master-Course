@@ -16,12 +16,29 @@ const inputElevation = document.querySelector('.form__input--elevation');
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(
     function (position) {
-      const {latitude} = position.coords;
-      const {longitude} = position.coords;
-      console.log(latitude, longitude)
+      const { latitude } = position.coords;
+      const { longitude } = position.coords;
+      console.log(latitude, longitude);
+
+      const coords = [latitude, longitude]
+      const map = L.map('map').setView(coords, 13); // El segundo parametro hace referencia a la cantidad de zoom del
+        // mapa
+
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.fr/hot/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+
+      L.marker(coords)
+        .addTo(map)
+        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+        .openPopup();
     },
     function () {
       alert('Could not get the position');
     }
   );
 }
+
+//////////////////////////////////////////////////////////
+// Mostrando un map usando libreria Leaflet
