@@ -14,31 +14,41 @@ const inputElevation = document.querySelector('.form__input--elevation');
 /////////////////////////////////////////////////////////
 // Geolocalización API
 if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(
-    function (position) {
-      const { latitude } = position.coords;
-      const { longitude } = position.coords;
-      console.log(latitude, longitude);
+	navigator.geolocation.getCurrentPosition(
+		function (position) {
+			const {latitude} = position.coords;
+			const {longitude} = position.coords;
+			console.log(latitude, longitude);
 
-      const coords = [latitude, longitude]
-      const map = L.map('map').setView(coords, 13); // El segundo parametro hace referencia a la cantidad de zoom del
-        // mapa
+			const coords = [latitude, longitude];
+			const map = L.map('map').setView(coords, 13); // El segundo parametro hace referencia a la cantidad de zoom
+			// del mapa
+			console.log(map);
+			L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				attribution:
+					'&copy; <a href="https://www.openstreetmap.fr/hot/copyright">OpenStreetMap</a> contributors',
+			}).addTo(map);
 
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.fr/hot/copyright">OpenStreetMap</a> contributors',
-      }).addTo(map);
-
-      L.marker(coords)
-        .addTo(map)
-        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-        .openPopup();
-    },
-    function () {
-      alert('Could not get the position');
-    }
-  );
+			map.on('click', function (mapEvent) {
+				console.log(mapEvent);
+				const {lat, lng} = mapEvent.latlng;
+				L.marker([lat, lng]).addTo(map).bindPopup(L.popup({
+					maxWidth: 250,
+					minWidth: 100,
+					autoClose: false,
+					closeOnClick: false,
+					className: 'running-popup'
+				})).setPopupContent('Workout').openPopup();
+			});
+		},
+		function () {
+			alert('Could not get the position');
+		}
+	);
 }
 
 //////////////////////////////////////////////////////////
 // Mostrando un map usando libreria Leaflet
+
+/////////////////////////////////////////////////////////
+// Mostrando un marcador en el mapa
