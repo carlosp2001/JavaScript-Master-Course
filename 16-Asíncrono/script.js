@@ -183,9 +183,9 @@ const getCountryDataC = function (country) {
 ////////////////////////////////////////////////////
 // Manejando Promesas Rechazadas
 
-btn.addEventListener('click', function () {
-    getCountryDataC('australia');
-});
+// btn.addEventListener('click', function () {
+//     getCountryDataC('australia');
+// });
 
 ////////////////////////////////////////////////////
 // Arrojando errores manualmente
@@ -289,5 +289,55 @@ wait(2)
     .then(() => console.log('I waited for 1 second'));
 
 Promise.resolve('abc').then(x => console.log(x));
-Promise.reject(new Error('Problem!')).catch(x => console.log(x))
+Promise.reject(new Error('Problem!')).catch(x => console.log(x));
 
+/////////////////////////////////////////////////////////////////
+// Prometiendo la API de Geolocalización
+
+console.log('Getting position');
+
+const getPosition = function () {
+    return new Promise(function (resolve, reject) {
+        // navigator.geolocation.getCurrentPosition(
+        //     position => resolve(position),
+        //     err => reject(err)
+        // );
+
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+};
+
+getPosition().then(pos => console.log(pos));
+
+const whereAmII = function () {
+    getPosition()
+        .then(pos => {
+            console.log('--------');
+            console.log(pos);
+            const { latitude: lat, longitude: lng } = pos.coords;
+
+            return fetch(
+                `https://geocode.xyz/${lat},${lng}?geoit=json&auth=418972686597070382439x92824`
+            );
+        })
+
+        .then(res => {
+            if (!res.ok)
+                throw new Error(`Problem with geocoding ${res.status}`);
+            console.log(res);
+            return res.json();
+        })
+        .then(data => {
+            console.log(data);
+            console.log(`You'are in ${data.city}, ${data.prov}`);
+            return fetch(`https://restcountries.com/v2/name/${data.prov}`);
+        })
+        .then(res => {
+            if (!res.ok) throw new Error(`Country not found (${res.status})`);
+            return res.json();
+        })
+        .then(data => renderCountry(data[0]))
+        .catch(err => console.error(`${err.message} 💥`));
+};
+
+btn.addEventListener('click', whereAmII);
