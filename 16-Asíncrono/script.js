@@ -105,10 +105,10 @@ const renderCountry = function (data, className = '') {
 // /////////////////////////////////////////////////////
 // // Encadenando promises (Chaining promises)
 //
-// const renderError = function (msg) {
-//     countriesContainer.insertAdjacentText('beforeend', msg);
-//     countriesContainer.style.opacity = 1;
-// };
+const renderError = function (msg) {
+    countriesContainer.insertAdjacentText('beforeend', msg);
+    countriesContainer.style.opacity = 1;
+};
 //
 // const getJSON = function (url, errorMsg = 'Something went wrong') {
 //     return fetch(url).then(response => {
@@ -445,12 +445,61 @@ const whereAmI = async function () {
     // );
 
     // Await nos ayuda a esperar al codigo hasta que la promesa se cumpla
-    const res = await fetch(`https://restcountries.com/v2/name/${dataGeo.prov}`);
+    const res = await fetch(
+        `https://restcountries.com/v2/name/${dataGeo.prov}`
+    );
     // console.log(res);
     const data = await res.json();
     console.log(data);
     renderCountry(data[0]);
 };
 
-whereAmI();
+// whereAmI();
 console.log('FIRST');
+
+////////////////////////////////////////////////////////////////
+// Manejo de errores con try...catch
+
+// try {
+//     let y = 1;
+//     const x = 2;
+//     y = 3;
+// } catch (err) {
+//     alert(err.message)
+// }
+
+const whereAmIC = async function () {
+    try {
+        // Geolocation
+        const pos = await getPosition();
+        const { latitude: lat, longitude: lng } = pos.coords;
+
+        // Reverse geocoding
+        const resGeo = await fetch(
+            `https://geocode.xyz/${lat},${lng}?geoit=json&auth=418972686597070382439x92824`
+        );
+        if (!resGeo.ok) throw new Error('Problem getting location data');
+
+        const dataGeo = await resGeo.json();
+        console.log(dataGeo);
+
+        // Country data
+        // fetch(`https://restcountries.com/v2/name/${country}`).then(res =>
+        //     console.log(res)
+        // );
+
+        // Await nos ayuda a esperar al codigo hasta que la promesa se cumpla
+        const res = await fetch(
+            `https://restcountries.com/v2/name/${dataGeo.prov}`
+        );
+        if (!res.ok) throw new Error('Problem getting country data');
+
+        // console.log(res);
+        const data = await res.json();
+        console.log(data);
+        renderCountry(data[0]);
+    } catch (err) {
+        console.log(err);
+        renderError(`Something went wrong 💥 ${err.message}`);
+    }
+};
