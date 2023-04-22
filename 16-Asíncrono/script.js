@@ -481,7 +481,7 @@ const whereAmIC = async function () {
         if (!resGeo.ok) throw new Error('Problem getting location data');
 
         const dataGeo = await resGeo.json();
-        console.log(dataGeo);
+        // console.log(dataGeo);
 
         // Country data
         // fetch(`https://restcountries.com/v2/name/${country}`).then(res =>
@@ -496,10 +496,38 @@ const whereAmIC = async function () {
 
         // console.log(res);
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
         renderCountry(data[0]);
+        return `You're in ${dataGeo.city}, ${dataGeo.country}`;
     } catch (err) {
         console.log(err);
         renderError(`Something went wrong 💥 ${err.message}`);
+
+        // Reject promise returned from async function
+        throw err;
     }
 };
+
+/////////////////////////////////////////////////////////////
+// Retornando valores de una función async
+
+console.log('1: Will get location');
+// const city = whereAmIC();
+// console.log(city);
+
+// whereAmIC()
+//     .then(city => console.log(city))
+//     .catch(err => console.error(`2: ${err.message} 💥`))
+//     .finally(() => console.log('3: Finished getting location'));
+// console.log('3: Finished getting location');
+
+(async function() {
+    try {
+        const city = await whereAmIC();
+        console.log(`2: ${city}`);
+    } catch (err) {
+        console.error(`2: ${err.message}`);
+    }
+    console.log('3: Finished getting location');
+})();
+
