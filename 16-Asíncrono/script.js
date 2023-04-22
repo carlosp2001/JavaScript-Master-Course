@@ -555,9 +555,166 @@ const get3Countries = async function (c1, c2, c3) {
         ]);
 
         console.log(data.map(d => d[0].capital));
-
     } catch (err) {
         console.error();
     }
 };
 get3Countries('portugal', 'canada', 'tanzania');
+
+////////////////////////////////////////////////////////////////////
+// Otros combinadores de promesas: race, allSettled y any]
+
+/*
+Promise.race: Recibe una serie de promesas y también devuelve una promesa
+Esta promesa que nos devuelve promise.race se resuelve tan pronto como se
+resuelve una de las promesas de entrada, es decir que con uno de los valores que
+este disponible sera devuelto, es una carrera de promesas
+
+ */
+
+(async function () {
+    const res = await Promise.race([
+        getJSON(`https://restcountries.com/v2/name/italy`),
+        getJSON(`https://restcountries.com/v2/name/egypt`),
+        getJSON(`https://restcountries.com/v2/name/mexico`),
+    ]);
+    console.log(res[0]);
+})();
+
+const timeout = function (sec) {
+    return new Promise(function (_, reject) {
+        setTimeout(function () {
+            reject(new Error('Request took too long'));
+        }, sec * 1000);
+    });
+};
+
+Promise.race([
+    getJSON(`https://restcountries.com/v2/name/tanzania`),
+    timeout(1),
+])
+    .then(res => console.log(res[0]))
+    .catch(err => console.log(err));
+
+/*
+Promise.allSettled: Incluye un arreglo de promesas y devolvera un array de todas
+las promesas completadas, sin importar si las promesas fueron rechazadas o no,
+nunca hace cortocircuitos
+ */
+
+Promise.allSettled([
+    Promise.resolve('Success'),
+    Promise.reject('ERROR'),
+    Promise.resolve('Another success'),
+]).then(res => console.log(res));
+
+/*
+Promise.any: Toma un array de multiples promesas y esta devolvera la primera
+promesa cumplida y simplemente ignorara las promesas rechazadas
+ */
+
+Promise.any([
+    Promise.resolve('Success'),
+    Promise.reject('ERROR'),
+    Promise.resolve('Another success'),
+]).then(res => console.log(res));
+
+///////////////////////////////////////
+// Coding Challenge #3
+
+/*
+PART 1
+Write an async function 'loadNPause' that recreates Coding Challenge #2, this time using async/await (only the part where the promise is consumed). Compare the two versions, think about the big differences, and see which one you like more.
+Don't forget to test the error handler, and to set the network speed to 'Fast 3G' in the dev tools Network tab.
+
+PART 2
+1. Create an async function 'loadAll' that receives an array of image paths 'imgArr';
+2. Use .map to loop over the array, to load all the images with the 'createImage' function (call the resulting array 'imgs')
+3. Check out the 'imgs' array in the console! Is it like you expected?
+4. Use a promise combinator function to actually get the images from the array 😉
+5. Add the 'paralell' class to all the images (it has some CSS styles).
+
+TEST DATA: ['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']. To test, turn off the 'loadNPause' function.
+
+GOOD LUCK 😀
+*/
+
+const wait1 = function (seconds) {
+    return new Promise(function (resolve) {
+        setTimeout(resolve, seconds * 1000);
+    });
+};
+
+const imgContainer1 = document.querySelector('.images');
+
+const createImage1 = function (imgPath) {
+    return new Promise(function (resolve, reject) {
+        const img = document.createElement('img');
+        img.src = imgPath;
+
+        img.addEventListener('load', function () {
+            imgContainer.append(img);
+            resolve(img);
+        });
+
+        img.addEventListener('error', function () {
+            reject(new Error('Image not found'));
+        });
+    });
+};
+
+// let currentImg;
+
+// createImage('img/img-1.jpg')
+//   .then(img => {
+//     currentImg = img;
+//     console.log('Image 1 loaded');
+//     return wait(2);
+//   })
+//   .then(() => {
+//     currentImg.style.display = 'none';
+//     return createImage('img/img-2.jpg');
+//   })
+//   .then(img => {
+//     currentImg = img;
+//     console.log('Image 2 loaded');
+//     return wait(2);
+//   })
+//   .then(() => {
+//     currentImg.style.display = 'none';
+//   })
+//   .catch(err => console.error(err));
+
+// PART 1
+const loadNPause = async function () {
+    try {
+        // Load image 1
+        let img = await createImage1('img/img-1.jpg');
+        console.log('Image 1 loaded');
+        await wait1(2);
+        img.style.display = 'none';
+
+        // Load image 2
+        img = await createImage('img/img-2.jpg');
+        console.log('Image 2 loaded');
+        await wait1(2);
+        img.style.display = 'none';
+    } catch (err) {
+        console.log(err);
+    }
+};
+loadNPause();
+
+// PART 2
+const loadAll = async function(imgArr) {
+    try {
+        const imgs = imgArr.map(async img => createImage(img));
+        // console.log(imgs);
+        const imgsEl = await Promise.all(imgs);
+        console.log(imgsEl);
+        imgsEl.forEach(img => img.classList.add('parallel'));
+    } catch (err) {
+        console.error(err);
+    }
+}
+loadAll(['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg'])
