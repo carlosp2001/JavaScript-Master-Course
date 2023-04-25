@@ -4,9 +4,10 @@ console.log('Exporting module ');
 
 // Blocking code: Este segmento hace que el codigo a donde se importara bloquee
 // su ejecución hasta que finalice el fetch
-console.log('Start fetching users');
+/*console.log('Start fetching users');
 await fetch('https://jsonplaceholder.typicode.com/users');
 console.log('Finish fetching users');
+*/
 
 const shippingCost = 10;
 export const cart = [];

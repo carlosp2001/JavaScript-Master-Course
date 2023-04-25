@@ -32,11 +32,13 @@ console.log(cart); // En este caso se demuestra la conexion que tenemos con el
 // Usando await en codigo de alto nivel
 
 // De esta forma ya no se necesita el uso de una funcion async
+/*
 console.log('Start fetching');
 const res = await fetch('https://jsonplaceholder.typicode.com/posts');
 const data = await res.json();
 console.log(data);
 console.log('Something');
+ */
 
 const getLastPost = async function () {
     const res = await fetch('https://jsonplaceholder.typicode.com/posts');
@@ -51,8 +53,10 @@ console.log(lastPost);
 //Not very clean
 lastPost.then(last => console.log(last));
 
+/*
 const lastPost2 = await getLastPost();
 console.log(lastPost2);
+ */
 
 //////////////////////////////////////////////////////////
 // Patrón de modulo
@@ -86,3 +90,71 @@ ShoppingCart2.addToCart('apple', 4);
 ShoppingCart2.addToCart('pizza', 2);
 console.log(ShoppingCart2);
 console.log(ShoppingCart2.shippingCost);
+
+//////////////////////////////////////////////////////////////
+// Módulos CommonJS
+
+// // Export
+// export.addToCart = function (product, quantity) {
+//     cart.push({ product, quantity });
+//     console.log(
+//         `${quantity} ${product} added to cart shipping cost is ${shippingCost}`
+//     );
+// }
+//
+// // Import
+// const { addToCart } = require('./shoppingCart.js');
+
+// import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+
+const state = {
+    cart: [
+        { product: 'bread', quantity: 5 },
+        { product: 'pizza', quantity: 5 },
+    ],
+    user: { loggedIn: true },
+};
+
+const stateClone = Object.assign({}, state);
+state.user.loggedIn = false;
+console.log(stateClone);
+
+// Clonar varios niveles con lodash
+
+const stateDeepClone = cloneDeep(state);
+state.user.loggedIn = true;
+console.log(stateDeepClone);
+console.log(state);
+
+// Esto nos ayuda a lograr que nuestra pagina no se reinicie cada vez que
+// cambiamos los datos, esto nos ayuda a que se inyecte automáticamente el
+// codigo
+
+if (module.hot) {
+    module.hot.accept();
+}
+
+class Person {
+    #greeting = 'Hey';
+    constructor(name) {
+        this.name = name;
+        console.log(`${this.#greeting}, ${this.name}`);
+    }
+}
+
+const jonas = new Person('Jonas');
+console.log('Jonas' ?? null);
+// Caracteristicas como find y promise no se pueden transpilar a ES5 porque
+// son caracteristicas especificas de ES6, a diferencia de otras caracteristicas
+// que solo fueron cambiadas sus sintaxis
+console.log(cart.find(el => el.quantity >= 2));
+Promise.resolve('TEST').then(x => console.log(x));
+
+import 'core-js/stable';
+
+// import 'core-js/stable/array/find';
+// import 'core-js/stable/promise';
+
+// Polifilling async functions
+import 'regenerator-runtime/runtime';
