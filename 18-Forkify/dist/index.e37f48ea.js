@@ -583,10 +583,10 @@ const controlRecipes = async function() {
         alert(err);
     }
 };
-[
-    "hashchange",
-    "load"
-].forEach((e)=>window.addEventListener(e, controlRecipes));
+const init = function() {
+    (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipes);
+};
+init();
 
 },{"core-js/modules/es.regexp.flags.js":"gSXXb","core-js/modules/web.immediate.js":"49tUX","./model.js":"Y4A21","./views/recipeView.js":"l60JC","regenerator-runtime/runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gSXXb":[function(require,module,exports) {
 var global = require("68c50c6f763e7c43");
@@ -2689,6 +2689,12 @@ class RecipeView {
     `;
         this.#parentElement.innerHTML = "";
         this.#parentElement.insertAdjacentHTML("afterbegin", markup);
+    }
+    addHandlerRender(handler) {
+        [
+            "hashchange",
+            "load"
+        ].forEach((e)=>window.addEventListener(e, handler));
     }
     #generateMarkup() {
         return `<figure class="recipe__fig">
